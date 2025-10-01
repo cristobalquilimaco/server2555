@@ -38,11 +38,11 @@ const WhyDonHosterSection: React.FC<WhyDonHosterSectionProps> = ({ darkMode }) =
   ];
 
   const clients = [
-    { name: 'VMware', logo: '../src/public/client_1.png', alt: 'VMware - Hybrid Cloud Powered' },
-    { name: 'EMC', logo: '../src/public/client_2.png', alt: 'EMC Corporation' },
-    { name: 'Cisco', logo: '../src/public/client_3.png', alt: 'Cisco Systems' },
-    { name: 'New Relic', logo: '../src/public/client_4.png', alt: 'New Relic' },
-    { name: 'Microsoft', logo: '../src/public/client_5.png', alt: 'Microsoft' }
+    { name: 'VMware', logo: '../src/images/client_1.png', alt: 'VMware - Hybrid Cloud Powered' },
+    { name: 'EMC', logo: '../src/images/client_2.png', alt: 'EMC Corporation' },
+    { name: 'Cisco', logo: '../src/images/client_3.png', alt: 'Cisco Systems' },
+    { name: 'New Relic', logo: '../src/images/client_4.png', alt: 'New Relic' },
+    { name: 'Microsoft', logo: '../src/images/client_5.png', alt: 'Microsoft' }
   ];
 
   return (

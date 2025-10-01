@@ -1,6 +1,6 @@
 import React from 'react';
 import { Server } from 'lucide-react';
-import logo from "../public/logo.png"
+import logo from ".././images/logo.png"
 
 const LoadingScreen: React.FC = () => {
   return (

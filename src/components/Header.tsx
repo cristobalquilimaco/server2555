@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Moon, Sun } from 'lucide-react';
-import logo from "../public/logo.png"
+import logo from ".././images/logo.png"
 
 interface HeaderProps {
   darkMode: boolean;

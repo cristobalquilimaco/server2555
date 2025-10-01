@@ -31,7 +31,7 @@ const LocationSection: React.FC<LocationSectionProps> = ({ darkMode }) => {
           <div className="relative">
             <div className="relative">
               <img 
-                src="../src/public/USA-Map-PNG.webp" 
+                src="../src/./images/USA-Map-PNG.webp" 
                 alt="United States Map" 
                 className="w-1/2 h-auto max-w-4xl mx-auto opacity-90"
               />

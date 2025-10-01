@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, MapPin, Facebook, Instagram, Twitter } from 'lucide-react';
-import logo from "../public/logo.png"
+import logo from ".././images/logo.png"
 
 interface FooterProps {
   darkMode: boolean;
