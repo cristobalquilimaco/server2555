@@ -1,5 +1,6 @@
 import React from 'react';
 import { Plus } from 'lucide-react';
+import mapaUsa from ".././images/USA-Map-PNG.webp"
 
 interface LocationSectionProps {
   darkMode: boolean;
@@ -31,7 +32,7 @@ const LocationSection: React.FC<LocationSectionProps> = ({ darkMode }) => {
           <div className="relative">
             <div className="relative">
               <img 
-                src="../src/./images/USA-Map-PNG.webp" 
+                src={mapaUsa} 
                 alt="United States Map" 
                 className="w-1/2 h-auto max-w-4xl mx-auto opacity-90"
               />
