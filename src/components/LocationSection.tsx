@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 
 interface LocationSectionProps {
   darkMode: boolean;

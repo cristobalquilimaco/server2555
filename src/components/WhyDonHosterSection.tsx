@@ -113,7 +113,7 @@ const WhyDonHosterSection: React.FC<WhyDonHosterSectionProps> = ({ darkMode }) =
                     <div className="absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-purple-500/0 group-hover:border-purple-500/60 transition-all duration-500 delay-300"></div>
                     
                     {/* Icon with circular background */}
-                    <div className={` inline-flex p-4 rounded-full mb-4 transition-all duration-300 ${
+                    <div className={`hidden lg:block  inline-flex p-4 rounded-full mb-4 transition-all duration-300 ${
                       darkMode ? 'bg-purple-900/50 group-hover:bg-purple-800/70' : 'bg-purple-100 group-hover:bg-purple-200'
                     } group-hover:scale-110 relative z-10 border-2 ${
                       darkMode ? 'border-purple-600/50' : 'border-purple-300/50'
@@ -123,7 +123,7 @@ const WhyDonHosterSection: React.FC<WhyDonHosterSectionProps> = ({ darkMode }) =
                       }`} />
                       
                       {/* Icon Glow Effect */}
-                      <div className="absolute inset-0 bg-purple-400/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      <div className="hidden lg:block  absolute inset-0 bg-purple-400/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     </div>
                     
                     <h3 className={`text-xl font-bold mb-1 transition-all duration-500 relative z-10 ${
