@@ -1,6 +1,10 @@
 import React from 'react';
 import { Shield, Settings, Headphones, Globe, ArrowUpRight, ArrowDownRight, ArrowUpLeft, ArrowDownLeft } from 'lucide-react';
-
+import client1 from '../images/client_1.png'
+import client2 from '../images/client_2.png'
+import client3 from '../images/client_3.png'
+import client4 from '../images/client_4.png'
+import client5 from '../images/client_5.png'
 interface WhyDonHosterSectionProps {
   darkMode: boolean;
 }
@@ -38,11 +42,11 @@ const WhyDonHosterSection: React.FC<WhyDonHosterSectionProps> = ({ darkMode }) =
   ];
 
   const clients = [
-    { name: 'VMware', logo: '.././src/images/client_1.png', alt: 'VMware - Hybrid Cloud Powered' },
-    { name: 'EMC', logo: '../src/./images/client_2.png', alt: 'EMC Corporation' },
-    { name: 'Cisco', logo: '../src/./images/client_3.png', alt: 'Cisco Systems' },
-    { name: 'New Relic', logo: '../src/./images/client_4.png', alt: 'New Relic' },
-    { name: 'Microsoft', logo: '../src/./images/client_5.png', alt: 'Microsoft' }
+    { name: 'VMware', logo: client1, alt: 'VMware - Hybrid Cloud Powered' },
+    { name: 'EMC', logo: client2, alt: 'EMC Corporation' },
+    { name: 'Cisco', logo: client3, alt: 'Cisco Systems' },
+    { name: 'New Relic', logo: client4, alt: 'New Relic' },
+    { name: 'Microsoft', logo: client5, alt: 'Microsoft' }
   ];
 
   return (
