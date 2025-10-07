@@ -5,11 +5,11 @@ import LoadingScreen from './components/LoadingScreen';
 import Home from './pages/Home';
 import DedicatedServers from './pages/DedicatedServers';
 import WebHosting from './pages/WebHosting';
-import VPS from './pages/VPS';
-import Cloud from './pages/Cloud';
-import About from './pages/About';
 import Contact from './pages/Contact';
 import Footer from './components/Footer';
+import VPSPage from './pages/VPSPage';
+import CloudPage from './pages/CloudPage';
+import AboutPage from './pages/AboutPage';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -39,9 +39,9 @@ function App() {
           <Route path="/" element={<Home darkMode={darkMode} />} />
           <Route path="/dedicated-servers" element={<DedicatedServers darkMode={darkMode} />} />
           <Route path="/web-hosting" element={<WebHosting darkMode={darkMode} />} />
-          <Route path="/vps" element={<VPS darkMode={darkMode} />} />
-          <Route path="/cloud" element={<Cloud darkMode={darkMode} />} />
-          <Route path="/about" element={<About darkMode={darkMode} />} />
+          <Route path="/vps" element={<VPSPage darkMode={darkMode} />} />
+          <Route path="/cloud" element={<CloudPage darkMode={darkMode} />} />
+          <Route path="/about" element={<AboutPage darkMode={darkMode} />} />
           <Route path="/contact" element={<Contact darkMode={darkMode} />} />
         </Routes>
         <Footer darkMode={darkMode} />

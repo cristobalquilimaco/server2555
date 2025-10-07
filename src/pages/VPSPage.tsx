@@ -1,177 +1,152 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
-  Globe, 
-  Shield, 
+  Cloud, 
+  Cpu, 
+  HardDrive, 
   Zap, 
   CheckCircle,
   ArrowRight,
-  HardDrive,
-  Mail,
+  Server,
+  Database,
   ChevronDown
 } from 'lucide-react';
 
-interface WebHostingProps {
+interface VPSPageProps {
   darkMode: boolean;
 }
 
-const WebHosting: React.FC<WebHostingProps> = ({ darkMode }) => {
+const VPSPage: React.FC<VPSPageProps> = ({ darkMode }) => {
+  const [activeTab, setActiveTab] = useState<keyof typeof comparisonData>('vps');
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  const hostingPlans = [
+  const vpsPlans = [
     {
-      name: 'Small Hosting',
-      price: '2.60',
+      name: 'VPS Small - Miami',
+      price: '14.00',
       setup: '0',
       specs: {
-        websites: '1 Domain allowed',
-        storage: '1.5 GB',
+        cpu: '1 vCPU Xeon E3-1230 @ 3.3 GHz',
+        ram: '1 GB',
+        storage: '20 GB HDD',
         bandwidth: 'Unlimited',
-        email: '15 Email accounts',
-        ssl: 'Free SSL'
+        connection: '1 Gbps'
       },
       features: [
-        'cPanel included',
-        '2 Additional domains',
-        '2 Domain aliases',
-        '10 Subdomains',
-        '5 MySQL databases',
-        '5 FTP accounts',
-        'Integrated DDoS protection',
-        'Automatic backups',
-        '30-day money-back guarantee',
-        '24/7 technical support',
-        'Miami, FL datacenter',
-        'Idera by V8-925 ® servers'
+        '1 dedicated IP (IPv4)',
+        'SSH root access',
+        '24/7 technical support'
       ],
-      url: "https://my.donhoster.com/cart.php?a=add&pid=15"
+      url: "https://my.donhoster.com/cart.php?a=add&pid=1"
     },
     {
-      name: 'Medium cPanel Hosting',
-      price: '3.50',
-      setup: '0',
-      specs: {
-        websites: '1 Domain allowed',
-        storage: '2 GB',
-        bandwidth: 'Unlimited',
-        email: '25 Email accounts',
-        ssl: 'Free SSL'
-      },
-      features: [
-        'cPanel included',
-        '3 Additional domains',
-        '3 Domain aliases',
-        '15 Subdomains',
-        '5 MySQL databases',
-        '5 FTP accounts',
-        'Integrated DDoS protection',
-        'Automatic backups',
-        '30-day money-back guarantee',
-        '24/7 technical support',
-        'Miami, FL datacenter',
-        'Idera by V8-925 ® servers'
-      ],
-      url: "https://my.donhoster.com/cart.php?a=add&pid=17"
-    },
-    {
-      name: 'Large cPanel Hosting',
-      price: '7.50',
+      name: 'VPS Medium - Miami',
+      price: '20.00',
       setup: '0',
       popular: true,
       specs: {
-        websites: '1 Domain allowed',
-        storage: '3 GB',
+        cpu: '2 vCPU Xeon E3-1230 @ 3.3 GHz',
+        ram: '2 GB',
+        storage: '50 GB HDD',
         bandwidth: 'Unlimited',
-        email: '30 Email accounts',
-        ssl: 'Free SSL'
+        connection: '1 Gbps'
       },
       features: [
-        'cPanel included',
-        '5 Additional domains',
-        '5 Domain aliases',
-        '20 Subdomains',
-        '10 MySQL databases',
-        '5 FTP accounts',
-        'Integrated DDoS protection',
-        'Automatic backups',
-        '30-day money-back guarantee',
-        '24/7 technical support',
-        'Miami, FL datacenter',
-        'Idera by V8-925 ® servers'
+        '1 dedicated IP (IPv4)',
+        'SSH root access',
+        '24/7 technical support'
       ],
-      url: "https://my.donhoster.com/cart.php?a=add&pid=18"
+      url: "https://my.donhoster.com/cart.php?a=add&pid=3"
     },
     {
-      name: 'Extra cPanel Hosting',
-      price: '11.99',
+      name: 'VPS Large - Miami',
+      price: '27.00',
       setup: '0',
       specs: {
-        websites: '1 Domain allowed',
-        storage: '5 GB',
+        cpu: '3 vCPU Xeon E3-1230 @ 3.3 GHz',
+        ram: '3 GB',
+        storage: '100 GB HDD',
         bandwidth: 'Unlimited',
-        email: '40 Email accounts',
-        ssl: 'Free SSL'
+        connection: '1 Gbps'
       },
       features: [
-        'cPanel included',
-        '7 Additional domains',
-        '7 Domain aliases',
-        '25 Subdomains',
-        '15 MySQL databases',
-        '10 FTP accounts',
-        'Integrated DDoS protection',
-        'Automatic backups',
-        '30-day money-back guarantee',
-        '24/7 technical support',
-        'Miami, FL datacenter',
-        'Idera by V8-925 ® servers'
+        '1 dedicated IP (IPv4)',
+        'SSH root access',
+        '24/7 technical support'
       ],
-      url: "https://my.donhoster.com/cart.php?a=add&pid=20"
+      url: "https://my.donhoster.com/cart.php?a=add&pid=4"
+    },
+    {
+      name: 'VPS Extra Large - Miami',
+      price: '35.00',
+      setup: '0',
+      specs: {
+        cpu: '4 vCPU Xeon E3-1230 @ 3.3 GHz',
+        ram: '4 GB',
+        storage: '250 GB HDD',
+        bandwidth: 'Unlimited',
+        connection: '1 Gbps'
+      },
+      features: [
+        '1 dedicated IP (IPv4)',
+        'SSH root access',
+        '24/7 technical support'
+      ],
+      url: "https://my.donhoster.com/cart.php?a=add&pid=5"
     }
   ];
 
-  const benefits = [
-    {
-      icon: Zap,
-      title: 'Superior Performance',
-      description: 'Latest generation SSD servers with ultra-fast loading times. Your website always at maximum performance.'
+  interface ComparisonData {
+    title: string;
+    pros: string[];
+    ideal: string;
+  }
+
+  const comparisonData: Record<'vps' | 'dedicated', ComparisonData> = {
+    vps: {
+      title: 'VPS Hosting',
+      pros: [
+        'Guaranteed dedicated resources',
+        'Full server control',
+        'Instant scalability',
+        'Best price-to-performance ratio',
+        'Easy management and maintenance'
+      ],
+      ideal: 'Medium-sized websites, web applications, development and testing'
     },
-    {
-      icon: Shield,
-      title: 'Maximum Security',
-      description: 'Advanced malware protection, configured firewall, and SSL certificates included in all plans.'
-    },
-    {
-      icon: Mail,
-      title: 'Stress-Free Migration',
-      description: 'Our technical team migrates your current website at no additional cost and with zero downtime.'
+    dedicated: {
+      title: 'Dedicated Server',
+      pros: [
+        'Complete physical hardware',
+        'Maximum performance',
+        'No server neighbors',
+        'Total customization',
+        'Best for mission-critical applications'
+      ],
+      ideal: 'Large applications, high traffic, maximum security'
     }
-  ];
+  };
 
   const faqs = [
     {
-      question: 'What does the free migration include?',
-      answer: 'We completely migrate your website from your current provider, including files, databases, emails, and configurations. The process is transparent with no downtime.'
+      question: 'What is the difference between VPS and shared hosting?',
+      answer: 'VPS offers you dedicated resources (CPU, RAM, storage) that you don\'t share with other users, while in shared hosting you share all server resources. This means better performance, greater control, and more stability.'
     },
     {
-      question: 'How long does it take to activate my hosting?',
-      answer: 'Your account is activated instantly after payment. You will receive cPanel access details in less than 5 minutes to start configuring your website.'
+      question: 'Can I scale my VPS when needed?',
+      answer: 'Yes, you can scale your VPS at any time. We can increase CPU, RAM, and storage with minimal downtime, typically in less than 30 minutes.'
     },
     {
-      question: 'Do you offer uptime guarantee?',
-      answer: 'Yes, we guarantee 99.9% uptime. If we don\'t meet this promise, we automatically compensate the lost time with credit to your account.'
+      question: 'Does it include a control panel?',
+      answer: 'Yes, all our VPS plans include an intuitive control panel from which you can manage your server, create backups, monitor resources, and configure applications.'
     },
     {
-      question: 'Can I change plans anytime?',
-      answer: 'Absolutely. You can upgrade or change your plan at any time from your control panel. Changes are immediate and hassle-free.'
+      question: 'What operating systems are available?',
+      answer: 'We offer multiple options: Ubuntu, CentOS, Debian, Windows Server, and other popular distributions. We can also install the OS of your preference.'
     },
     {
-      question: 'Is SSL certificate included?',
-      answer: 'Yes, all our plans include a free SSL certificate with automatic renewal. For higher plans, we include premium and wildcard SSL.'
-    },
-    {
-      question: 'What technical support do you offer?',
-      answer: '24/7 technical support in English via chat, email, and phone. Our team specializes in hosting and can resolve any technical query.'
+      question: 'Do they include automatic backups?',
+      answer: 'Yes, we perform automatic daily backups that are stored for 30 days. You can also create manual snapshots whenever you need.'
     }
   ];
 
@@ -186,9 +161,9 @@ const WebHosting: React.FC<WebHostingProps> = ({ darkMode }) => {
     >
       {/* Hero Section */}
       <section className="relative py-16 lg:py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-blue-900 to-purple-900 opacity-100"></div>
-        <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg')] bg-cover bg-center bg-black opacity-20"></div>
-
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-purple-900 to-black opacity-100"></div>
+        <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/442150/pexels-photo-442150.jpeg')] bg-cover bg-center bg-black opacity-20"></div>
+        
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -196,17 +171,17 @@ const WebHosting: React.FC<WebHostingProps> = ({ darkMode }) => {
             transition={{ duration: 0.8 }}
             className="text-4xl lg:text-6xl font-bold mb-6"
           >
-            Reliable and <span className="text-purple-400">Affordable</span> Hosting Solutions
+            <span className="text-purple-400">Fast</span> and Scalable VPS Hosting in Miami
           </motion.h1>
-
+          
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl lg:text-2xl mb-8 text-gray-200 max-w-3xl mx-auto"
           >
-            WordPress-optimized web hosting with exceptional performance, 
-            advanced security, and premium technical support.
+            Private virtual servers with dedicated resources, full control, 
+            and instant scalability. Perfect for growing projects.
           </motion.p>
 
           <motion.div
@@ -218,41 +193,35 @@ const WebHosting: React.FC<WebHostingProps> = ({ darkMode }) => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => {
-                document.getElementById("hosting-plans")?.scrollIntoView({ behavior: "smooth" });
-              }}
               className="px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors duration-200 flex items-center space-x-2"
             >
-              <span>View Hosting Plans</span>
+              <span>View VPS Plans</span>
               <ArrowRight className="w-5 h-5" />
             </motion.button>
           </motion.div>
         </div>
       </section>
 
-      {/* Hosting Plans */}
-      <section 
-        id="hosting-plans"
-        className={`py-16 lg:py-24 transition-colors duration-300 ${
-          darkMode ? 'bg-gray-900' : 'bg-white'
-        }`}
-      >
+      {/* VPS Plans */}
+      <section className={`py-16 lg:py-24 transition-colors duration-300 ${
+        darkMode ? 'bg-gray-900' : 'bg-white'
+      }`}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className={`text-3xl lg:text-4xl font-bold mb-4 transition-colors duration-300 ${
               darkMode ? 'text-white' : 'text-gray-900'
             }`}>
-              Web Hosting Plans
+              VPS Plans in Miami
             </h2>
             <p className={`text-xl transition-colors duration-300 ${
               darkMode ? 'text-gray-300' : 'text-gray-600'
             }`}>
-              From personal projects to enterprise websites
+              Dedicated resources and guaranteed performance for your project
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {hostingPlans.map((plan, index) => (
+            {vpsPlans.map((plan, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
@@ -276,7 +245,7 @@ const WebHosting: React.FC<WebHostingProps> = ({ darkMode }) => {
                 )}
 
                 <div className="text-center mb-8">
-                  <Globe className={`w-12 h-12 mx-auto mb-4 ${
+                  <Cloud className={`w-12 h-12 mx-auto mb-4 ${
                     plan.popular ? 'text-purple-200' : 'text-purple-600'
                   }`} />
                   <h3 className={`text-2xl font-bold mb-4 ${
@@ -330,7 +299,7 @@ const WebHosting: React.FC<WebHostingProps> = ({ darkMode }) => {
                   </h4>
                   <div className="space-y-2 text-sm">
                     <div className="flex items-center space-x-2">
-                      <Globe className={`w-4 h-4 ${
+                      <Cpu className={`w-4 h-4 ${
                         plan.popular ? 'text-purple-200' : 'text-purple-600'
                       }`} />
                       <span className={
@@ -339,7 +308,19 @@ const WebHosting: React.FC<WebHostingProps> = ({ darkMode }) => {
                           : darkMode 
                           ? 'text-white' 
                           : 'text-gray-900'
-                      }>{plan.specs.websites}</span>
+                      }>{plan.specs.cpu}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Database className={`w-4 h-4 ${
+                        plan.popular ? 'text-purple-200' : 'text-purple-600'
+                      }`} />
+                      <span className={
+                        plan.popular 
+                          ? 'text-white' 
+                          : darkMode 
+                          ? 'text-white' 
+                          : 'text-gray-900'
+                      }>RAM: {plan.specs.ram}</span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <HardDrive className={`w-4 h-4 ${
@@ -366,7 +347,7 @@ const WebHosting: React.FC<WebHostingProps> = ({ darkMode }) => {
                       }>Bandwidth: {plan.specs.bandwidth}</span>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <Mail className={`w-4 h-4 ${
+                      <Server className={`w-4 h-4 ${
                         plan.popular ? 'text-purple-200' : 'text-purple-600'
                       }`} />
                       <span className={
@@ -375,19 +356,7 @@ const WebHosting: React.FC<WebHostingProps> = ({ darkMode }) => {
                           : darkMode 
                           ? 'text-white' 
                           : 'text-gray-900'
-                      }>{plan.specs.email}</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Shield className={`w-4 h-4 ${
-                        plan.popular ? 'text-purple-200' : 'text-purple-600'
-                      }`} />
-                      <span className={
-                        plan.popular 
-                          ? 'text-white' 
-                          : darkMode 
-                          ? 'text-white' 
-                          : 'text-gray-900'
-                      }>{plan.specs.ssl}</span>
+                      }>Connection: {plan.specs.connection}</span>
                     </div>
                   </div>
                 </div>
@@ -431,7 +400,7 @@ const WebHosting: React.FC<WebHostingProps> = ({ darkMode }) => {
                       : 'bg-purple-600 text-white hover:bg-purple-700'
                   }`}
                 >
-                  <span>Get Started</span>
+                  <span>Buy Now</span>
                   <ArrowRight className="w-4 h-4" />
                 </motion.button>
               </motion.div>
@@ -440,7 +409,7 @@ const WebHosting: React.FC<WebHostingProps> = ({ darkMode }) => {
         </div>
       </section>
 
-      {/* Benefits Section */}
+      {/* Comparison Section */}
       <section className={`py-16 lg:py-24 transition-colors duration-300 ${
         darkMode ? 'bg-gray-800' : 'bg-gray-50'
       }`}>
@@ -449,162 +418,133 @@ const WebHosting: React.FC<WebHostingProps> = ({ darkMode }) => {
             <h2 className={`text-3xl lg:text-4xl font-bold mb-4 transition-colors duration-300 ${
               darkMode ? 'text-white' : 'text-gray-900'
             }`}>
-              Hosting Advantages
+              VPS vs. Dedicated Server
             </h2>
             <p className={`text-xl transition-colors duration-300 ${
               darkMode ? 'text-gray-300' : 'text-gray-600'
             }`}>
-              Everything you need for your website's success
+              Find the solution that best fits your needs
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {benefits.map((benefit, index) => {
-              const Icon = benefit.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.05, y: -10 }}
-                  className={`text-center p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 ${
-                    darkMode 
-                      ? 'bg-gray-800 hover:bg-gray-700 border border-gray-700' 
-                      : 'bg-white hover:bg-gray-50 border border-gray-200'
-                  }`}
-                >
-                  <motion.div
-                    whileHover={{ scale: 1.1, rotate: 360 }}
-                    transition={{ duration: 0.3 }}
-                    className={`w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center ${
-                      darkMode ? 'bg-purple-900/50' : 'bg-purple-100'
-                    }`}
-                  >
-                    <Icon className="w-8 h-8 text-purple-600" />
-                  </motion.div>
-                  <h3 className={`text-xl font-semibold mb-4 transition-colors duration-300 ${
-                    darkMode ? 'text-white' : 'text-gray-900'
-                  }`}>
-                    {benefit.title}
-                  </h3>
-                  <p className={`transition-colors duration-300 ${
-                    darkMode ? 'text-gray-300' : 'text-gray-600'
-                  }`}>
-                    {benefit.description}
-                  </p>
-                </motion.div>
-              );
-            })}
+          {/* Tab Navigation */}
+          <div className="flex justify-center mb-12">
+            <div className={`flex rounded-xl p-2 shadow-lg ${
+              darkMode ? 'bg-gray-700' : 'bg-white'
+            }`}>
+              <button
+                onClick={() => setActiveTab('vps')}
+                className={`px-6 py-3 rounded-lg font-semibold transition-all duration-200 ${
+                  activeTab === 'vps'
+                    ? 'bg-purple-600 text-white'
+                    : darkMode
+                    ? 'text-gray-300 hover:text-purple-400'
+                    : 'text-gray-600 hover:text-purple-600'
+                }`}
+              >
+                VPS Hosting
+              </button>
+              <button
+                onClick={() => setActiveTab('dedicated')}
+                className={`px-6 py-3 rounded-lg font-semibold transition-all duration-200 ${
+                  activeTab === 'dedicated'
+                    ? 'bg-purple-600 text-white'
+                    : darkMode
+                    ? 'text-gray-300 hover:text-purple-400'
+                    : 'text-gray-600 hover:text-purple-600'
+                }`}
+              >
+                Dedicated Server
+              </button>
+            </div>
           </div>
-        </div>
-      </section>
 
-      {/* WordPress Section */}
-      <section className={`py-16 lg:py-24 transition-colors duration-300 ${
-        darkMode ? 'bg-gray-900' : 'bg-white'
-      }`}>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className={`text-3xl lg:text-4xl font-bold mb-6 transition-colors duration-300 ${
-                darkMode ? 'text-white' : 'text-gray-900'
-              }`}>
-                Optimized for WordPress
-              </h2>
-              <p className={`text-xl mb-8 transition-colors duration-300 ${
-                darkMode ? 'text-gray-300' : 'text-gray-600'
-              }`}>
-                WordPress specialized hosting with all the necessary tools 
-                to create professional websites quickly and securely.
-              </p>
-              
-              <div className="space-y-4 mb-8">
-                <div className="flex items-center space-x-3">
-                  <CheckCircle className="w-6 h-6 text-green-500" />
-                  <span className={`transition-colors duration-300 ${
-                    darkMode ? 'text-gray-300' : 'text-gray-700'
-                  }`}>
-                    1-click WordPress installation
-                  </span>
+          {/* Tab Content */}
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3 }}
+            className="max-w-3xl mx-auto"
+          >
+            <div className={`p-8 rounded-2xl shadow-xl ${
+              darkMode ? 'bg-gray-700' : 'bg-white'
+            }`}>
+              <div className="text-center mb-8">
+                <div className={`w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center ${
+                  darkMode ? 'bg-purple-900/50' : 'bg-purple-100'
+                }`}>
+                  {activeTab === 'vps' ? (
+                    <Cloud className="w-8 h-8 text-purple-600" />
+                  ) : (
+                    <Server className="w-8 h-8 text-purple-600" />
+                  )}
                 </div>
-                <div className="flex items-center space-x-3">
-                  <CheckCircle className="w-6 h-6 text-green-500" />
-                  <span className={`transition-colors duration-300 ${
-                    darkMode ? 'text-gray-300' : 'text-gray-700'
-                  }`}>
-                    Premium themes included
-                  </span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <CheckCircle className="w-6 h-6 text-green-500" />
-                  <span className={`transition-colors duration-300 ${
-                    darkMode ? 'text-gray-300' : 'text-gray-700'
-                  }`}>
-                    Pre-configured security plugins
-                  </span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <CheckCircle className="w-6 h-6 text-green-500" />
-                  <span className={`transition-colors duration-300 ${
-                    darkMode ? 'text-gray-300' : 'text-gray-700'
-                  }`}>
-                    Automatic updates
-                  </span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <CheckCircle className="w-6 h-6 text-green-500" />
-                  <span className={`transition-colors duration-300 ${
-                    darkMode ? 'text-gray-300' : 'text-gray-700'
-                  }`}>
-                    Optimized cache for maximum performance
-                  </span>
-                </div>
+                <h3 className={`text-2xl font-bold mb-4 transition-colors duration-300 ${
+                  darkMode ? 'text-white' : 'text-gray-900'
+                }`}>
+                  {comparisonData[activeTab].title}
+                </h3>
               </div>
 
-              <motion.button
-                onClick={() => {
-                  document.getElementById("hosting-plans")?.scrollIntoView({ behavior: "smooth" });
-                }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-6 py-3 bg-purple-600 text-white font-semibold rounded-lg hover:bg-purple-700 transition-colors duration-200 flex items-center space-x-2"
-              >
-                <span>Start with WordPress</span>
-                <ArrowRight className="w-4 h-4" />
-              </motion.button>
-            </div>
+              <div className="mb-8">
+                <h4 className={`text-lg font-semibold mb-4 transition-colors duration-300 ${
+                  darkMode ? 'text-white' : 'text-gray-900'
+                }`}>
+                  Advantages:
+                </h4>
+                <ul className="space-y-3">
+                  {comparisonData[activeTab].pros.map((pro, index) => (
+                    <motion.li
+                      key={index}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.1 }}
+                      className="flex items-center space-x-3"
+                    >
+                      <CheckCircle className="w-5 h-5 text-purple-500" />
+                      <span className={`transition-colors duration-300 ${
+                        darkMode ? 'text-gray-300' : 'text-gray-700'
+                      }`}>{pro}</span>
+                    </motion.li>
+                  ))}
+                </ul>
+              </div>
 
-            <div className="relative">
-              <motion.img
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8 }}
-                src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg"
-                alt="WordPress Hosting"
-                className="rounded-2xl shadow-xl"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-purple-600/20 to-transparent rounded-2xl"></div>
+              <div className={`p-6 rounded-lg ${
+                darkMode ? 'bg-purple-900/20' : 'bg-purple-50'
+              }`}>
+                <h4 className={`text-lg font-semibold mb-2 ${
+                  darkMode ? 'text-purple-300' : 'text-purple-900'
+                }`}>
+                  Ideal for:
+                </h4>
+                <p className={`${
+                  darkMode ? 'text-purple-300' : 'text-purple-700'
+                }`}>
+                  {comparisonData[activeTab].ideal}
+                </p>
+              </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* FAQ Section */}
       <section className={`py-16 lg:py-24 transition-colors duration-300 ${
-        darkMode ? 'bg-gray-800' : 'bg-gray-50'
+        darkMode ? 'bg-gray-900' : 'bg-white'
       }`}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className={`text-3xl lg:text-4xl font-bold mb-4 transition-colors duration-300 ${
               darkMode ? 'text-white' : 'text-gray-900'
             }`}>
-              Frequently Asked Questions About Hosting
+              Frequently Asked Questions about VPS
             </h2>
             <p className={`text-xl transition-colors duration-300 ${
               darkMode ? 'text-gray-300' : 'text-gray-600'
             }`}>
-              Everything you need to know about our hosting services
+              We answer your most common questions about our VPS services
             </p>
           </div>
 
@@ -616,16 +556,16 @@ const WebHosting: React.FC<WebHostingProps> = ({ darkMode }) => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className={`rounded-xl shadow-lg overflow-hidden ${
-                  darkMode ? 'bg-gray-700' : 'bg-white'
+                  darkMode ? 'bg-gray-800' : 'bg-white'
                 }`}
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
                   className={`w-full p-6 text-left flex items-center justify-between transition-colors ${
-                    darkMode ? 'hover:bg-gray-600' : 'hover:bg-gray-50'
+                    darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-50'
                   }`}
                 >
-                  <h3 className={`text-lg font-semibold ${
+                  <h3 className={`text-lg font-semibold transition-colors duration-300 ${
                     darkMode ? 'text-white' : 'text-gray-900'
                   }`}>
                     {faq.question}
@@ -646,7 +586,7 @@ const WebHosting: React.FC<WebHostingProps> = ({ darkMode }) => {
                   transition={{ duration: 0.3 }}
                   className="overflow-hidden"
                 >
-                  <div className={`p-6 pt-0 ${
+                  <div className={`p-6 pt-0 transition-colors duration-300 ${
                     darkMode ? 'text-gray-300' : 'text-gray-600'
                   }`}>
                     {faq.answer}
@@ -659,14 +599,14 @@ const WebHosting: React.FC<WebHostingProps> = ({ darkMode }) => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 lg:py-24 bg-gradient-to-r from-purple-600 to-blue-600">
+      <section className="py-16 lg:py-24 bg-gradient-to-r from-purple-600 to-purple-800">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <h2 className="text-3xl lg:text-4xl font-bold mb-6">
-            Ready to launch your website?
+            Ready to get started with your VPS?
           </h2>
           <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-            Join thousands of satisfied customers who trust our hosting 
-            to grow their online presence.
+            Set up your virtual server in minutes and start enjoying 
+            full control over your infrastructure.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -674,20 +614,17 @@ const WebHosting: React.FC<WebHostingProps> = ({ darkMode }) => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 bg-white text-purple-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors duration-200 flex items-center justify-center space-x-2"
-              onClick={() => {
-                document.getElementById("hosting-plans")?.scrollIntoView({ behavior: "smooth" });
-              }}
             >
-              <span>Get Started Now</span>
+              <span>Get VPS Now</span>
               <ArrowRight className="w-5 h-5" />
             </motion.button>
-
+            
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-purple-600 font-semibold rounded-lg transition-all duration-200"
             >
-              Free Migration
+              Talk to an Expert
             </motion.button>
           </div>
         </div>
@@ -696,4 +633,4 @@ const WebHosting: React.FC<WebHostingProps> = ({ darkMode }) => {
   );
 };
 
-export default WebHosting;
+export default VPSPage;
