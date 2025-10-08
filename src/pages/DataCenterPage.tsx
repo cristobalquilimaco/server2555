@@ -13,6 +13,7 @@ import {
   ChevronRight,
   Leaf
 } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 
 interface DataCenterPageProps {
   darkMode: boolean;
@@ -81,14 +82,14 @@ const DataCenterPage: React.FC<DataCenterPageProps> = ({ darkMode }) => {
       setCurrentPartnerIndex((prev) => (prev + 1) % partners.length);
     }, 3500);
     return () => clearInterval(partnerInterval);
-  }, []);
+  }, [partners.length]);
 
   useEffect(() => {
     const dcInterval = setInterval(() => {
       setCurrentDataCenterIndex((prev) => (prev + 1) % dataCenterImages.length);
     }, 4500);
     return () => clearInterval(dcInterval);
-  }, []);
+  }, [dataCenterImages.length]);
 
   const nextPartner = () => {
     setCurrentPartnerIndex((prev) => (prev + 1) % partners.length);
@@ -107,6 +108,228 @@ const DataCenterPage: React.FC<DataCenterPageProps> = ({ darkMode }) => {
   };
 
   return (
+    <>
+    <Helmet>
+      {/* Basic Configuration */}
+      <html lang="en" />
+      <meta charSet="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+
+      {/* SEO Meta Tags */}
+      <title>Miami Data Centers for Global Connectivity | DonHoster</title>
+      <meta name="description" content="Miami Data Centers for Global Connectivity. Tier 1 infrastructure, 100Gbps+ network, 2N+1 redundancy. Dedicated servers, colocation & cloud hosting 24/7." />
+      <meta 
+        name="keywords" 
+        content="miami data center, data center miami, miami hosting, dedicated servers miami, colocation miami, cloud hosting, global connectivity, tier 1 data center, redundant infrastructure, donhoster, netcrohosting, hurricane protected data center" 
+      />
+      <meta name="author" content="DonHoster" />
+      <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+      <meta name="googlebot" content="index, follow" />
+      <meta name="bingbot" content="index, follow" />
+
+      {/* Canonical URL */}
+      <link rel="canonical" href="https://www.donhoster.com/data-centers" />
+
+      {/* Language and Geolocation */}
+      <meta name="language" content="English" />
+      <meta name="geo.region" content="US-FL" />
+      <meta name="geo.placename" content="Miami, Florida" />
+      <meta name="geo.position" content="25.7617;-80.1918" />
+      <meta name="ICBM" content="25.7617, -80.1918" />
+
+      {/* Hreflang */}
+      <link rel="alternate" hrefLang="en" href="https://www.donhoster.com/data-centers" />
+      <link rel="alternate" hrefLang="x-default" href="https://www.donhoster.com/data-centers" />
+
+      {/* Open Graph (Facebook, LinkedIn) */}
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content="Miami Data Centers for Global Connectivity" />
+      <meta property="og:description" content="Miami Data Centers for Global Connectivity. Tier 1 infrastructure, 100Gbps+ network, 2N+1 redundancy. Dedicated servers, colocation & cloud hosting 24/7." />
+      <meta property="og:image" content="https://www.donhoster.com/images/og-datacenter.jpg" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="DonHoster Miami Data Centers - World-Class Infrastructure" />
+      <meta property="og:url" content="https://www.donhoster.com/data-centers" />
+      <meta property="og:site_name" content="DonHoster" />
+      <meta property="og:locale" content="en_US" />
+
+      {/* Twitter Cards */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@donhoster" />
+      <meta name="twitter:creator" content="@donhoster" />
+      <meta name="twitter:title" content="Miami Data Centers for Global Connectivity" />
+      <meta name="twitter:description" content="Miami Data Centers for Global Connectivity. Tier 1 infrastructure, 100Gbps+ network, 2N+1 redundancy. Dedicated servers, colocation & cloud hosting 24/7." />
+      <meta name="twitter:image" content="https://www.donhoster.com/images/og-datacenter.jpg" />
+      <meta name="twitter:image:alt" content="DonHoster Miami Data Centers" />
+
+      {/* Schema.org Structured Data - DataCenter */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "DataCatalog",
+          "name": "DonHoster Miami Data Centers",
+          "description": "Miami data centers with global connectivity to Latin America, US and Europe",
+          "url": "https://www.donhoster.com/data-centers",
+          "provider": {
+            "@type": "Organization",
+            "name": "DonHoster",
+            "url": "https://www.donhoster.com",
+            "logo": "https://www.donhoster.com/logo.png",
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "customer service",
+              "areaServed": "US",
+              "availableLanguage": "English"
+            },
+            "sameAs": [
+              "https://www.facebook.com/donhoster",
+              "https://www.twitter.com/donhoster",
+              "https://www.instagram.com/donhoster",
+              "https://www.linkedin.com/company/donhoster"
+            ]
+          }
+        })}
+      </script>
+
+      {/* Schema.org - Place (Data Center Location) */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Place",
+          "name": "DonHoster Miami Data Center",
+          "description": "Tier 1 data center in Miami with 2N+1 redundant infrastructure",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "36 NE 2nd St #400",
+            "addressLocality": "Miami",
+            "addressRegion": "FL",
+            "postalCode": "33132",
+            "addressCountry": "US"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "25.7617",
+            "longitude": "-80.1918"
+          },
+          "hasMap": "https://www.google.com/maps/place/36+NE+2nd+St+%23400,+Miami,+FL+33132"
+        })}
+      </script>
+
+      {/* Schema.org - Product/Service */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "serviceType": "Data Center Services",
+          "name": "Miami Data Center Hosting Services",
+          "description": "Hosting services, dedicated servers, colocation and cloud hosting in Miami",
+          "provider": {
+            "@type": "Organization",
+            "name": "DonHoster"
+          },
+          "areaServed": {
+            "@type": "Place",
+            "name": "Global"
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Data Center Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Dedicated Servers",
+                  "description": "High-performance dedicated servers with 100Gbps+ network capacity"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Colocation Services",
+                  "description": "Secure colocation with 1/4, 1/2, and full rack options"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Cloud Hosting",
+                  "description": "Scalable cloud hosting solutions with global connectivity"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Virtual Servers",
+                  "description": "Flexible virtual server solutions with guaranteed uptime"
+                }
+              }
+            ]
+          }
+        })}
+      </script>
+
+      {/* Schema.org - BreadcrumbList */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://www.donhoster.com"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Data Centers",
+              "item": "https://www.donhoster.com/data-centers"
+            }
+          ]
+        })}
+      </script>
+
+      {/* Google Tag Manager - Head */}
+      <script>
+        {`
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-57P7TBP');
+        `}
+      </script>
+
+      {/* DNS Prefetch and Preconnect for Performance */}
+      <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+      <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://www.googletagmanager.com" />
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
+      {/* Preload Critical Images */}
+      <link 
+        rel="preload" 
+        as="image" 
+        href="https://images.pexels.com/photos/442150/pexels-photo-442150.jpeg" 
+      />
+
+      {/* Mobile App Meta Tags */}
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+      <meta name="apple-mobile-web-app-title" content="DonHoster DC" />
+      <meta name="format-detection" content="telephone=no" />
+      <meta name="theme-color" content="#9333ea" />
+
+      {/* Security */}
+      <meta name="referrer" content="no-referrer-when-downgrade" />
+    </Helmet>
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
       {/* Hero Section */}
       <section className="relative py-16 lg:py-24 overflow-hidden">
@@ -364,7 +587,6 @@ const DataCenterPage: React.FC<DataCenterPageProps> = ({ darkMode }) => {
                   <div
                     key={index}
                     className="flex-shrink-0 px-3 partner-slide"
-                    style={{}}
                   >
                     <div
                       className={`p-8 lg:p-12 rounded-2xl shadow-xl transition-all duration-500 ${
@@ -420,20 +642,22 @@ const DataCenterPage: React.FC<DataCenterPageProps> = ({ darkMode }) => {
             </div>
           </div>
 
-          <style jsx>{`
-            @media (max-width: 768px) {
-              .partner-slide {
-                width: 50% !important;
-                min-width: 50% !important;
+          <style dangerouslySetInnerHTML={{
+            __html: `
+              @media (max-width: 768px) {
+                .partner-slide {
+                  width: 50% !important;
+                  min-width: 50% !important;
+                }
               }
-            }
-            @media (min-width: 769px) {
-              .partner-slide {
-                width: 25% !important;
-                min-width: 25% !important;
+              @media (min-width: 769px) {
+                .partner-slide {
+                  width: 25% !important;
+                  min-width: 25% !important;
+                }
               }
-            }
-          `}</style>
+            `
+          }} />
         </div>
       </section>
 
@@ -458,7 +682,6 @@ const DataCenterPage: React.FC<DataCenterPageProps> = ({ darkMode }) => {
                   <div
                     key={index}
                     className="flex-shrink-0 data-center-slide"
-                    style={{}}
                   >
                     <div
                       className={`relative rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 ${
@@ -511,20 +734,22 @@ const DataCenterPage: React.FC<DataCenterPageProps> = ({ darkMode }) => {
             </div>
           </div>
 
-          <style jsx>{`
-            @media (max-width: 768px) {
-              .data-center-slide {
-                width: calc(100% - 12px) !important;
-                min-width: calc(100% - 12px) !important;
+          <style dangerouslySetInnerHTML={{
+            __html: `
+              @media (max-width: 768px) {
+                .data-center-slide {
+                  width: calc(100% - 12px) !important;
+                  min-width: calc(100% - 12px) !important;
+                }
               }
-            }
-            @media (min-width: 769px) {
-              .data-center-slide {
-                width: calc(33.333% - 12px) !important;
-                min-width: calc(33.333% - 12px) !important;
+              @media (min-width: 769px) {
+                .data-center-slide {
+                  width: calc(33.333% - 12px) !important;
+                  min-width: calc(33.333% - 12px) !important;
+                }
               }
-            }
-          `}</style>
+            `
+          }} />
         </div>
       </section>
 
@@ -551,6 +776,7 @@ const DataCenterPage: React.FC<DataCenterPageProps> = ({ darkMode }) => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 

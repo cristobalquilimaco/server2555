@@ -222,24 +222,285 @@ const CloudPage: React.FC<CloudPageProps> = ({ darkMode}) => {
   // Structured Data omitted here for brevity but should be included similarly with translations if needed.
 
   return (
+    <>
+        <Helmet>
+      {/* Basic Configuration */}
+      <html lang="en" />
+      <meta charSet="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+
+      {/* SEO Meta Tags */}
+      <title>Cloud VPS Miami from $23/month | DonHoster</title>
+      <meta name="description" content="Cloud VPS Miami from $23/month with Intel CPUs, NVMe SSD, VMware hypervisor & 24/7 support. Scalable virtual servers, snapshots included. 99.9% uptime guaranteed." />
+      <meta 
+        name="keywords" 
+        content="cloud vps miami, virtual private server, vps hosting, cloud computing, vmware vps, nvme ssd vps, scalable vps, miami cloud hosting, linux vps, windows vps, dedicated resources vps, managed vps" 
+      />
+      <meta name="author" content="DonHoster" />
+      <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+      <meta name="googlebot" content="index, follow" />
+      <meta name="bingbot" content="index, follow" />
+
+      {/* Canonical URL */}
+      <link rel="canonical" href="https://www.donhoster.com/cloud" />
+
+      {/* Language and Geolocation */}
+      <meta name="language" content="English" />
+      <meta name="geo.region" content="US-FL" />
+      <meta name="geo.placename" content="Miami, Florida" />
+
+      {/* Hreflang */}
+      <link rel="alternate" hrefLang="en" href="https://www.donhoster.com/cloud" />
+      <link rel="alternate" hrefLang="x-default" href="https://www.donhoster.com/cloud" />
+
+      {/* Open Graph (Facebook, LinkedIn) */}
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content="Cloud VPS Miami from $23/month" />
+      <meta property="og:description" content="Cloud VPS Miami from $23/month with Intel CPUs, NVMe SSD, VMware hypervisor & 24/7 support. Scalable virtual servers with 99.9% uptime guaranteed." />
+      <meta property="og:image" content="https://www.donhoster.com/images/og-cloud.jpg" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="DonHoster Cloud VPS Hosting Plans" />
+      <meta property="og:url" content="https://www.donhoster.com/cloud" />
+      <meta property="og:site_name" content="DonHoster" />
+      <meta property="og:locale" content="en_US" />
+
+      {/* Twitter Cards */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@donhoster" />
+      <meta name="twitter:creator" content="@donhoster" />
+      <meta name="twitter:title" content="Cloud VPS Miami from $23/month" />
+      <meta name="twitter:description" content="Cloud VPS Miami from $23/month with Intel CPUs, NVMe SSD, VMware hypervisor & 24/7 support. Scalable virtual servers with 99.9% uptime guaranteed." />
+      <meta name="twitter:image" content="https://www.donhoster.com/images/og-cloud-vps.jpg" />
+      <meta name="twitter:image:alt" content="DonHoster Cloud VPS" />
+
+      {/* Schema.org - Product (VPS Plans) */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          "name": "Cloud VPS Miami",
+          "description": "Scalable Cloud VPS with Intel CPUs, NVMe SSD storage, VMware hypervisor and 24/7 technical support",
+          "brand": {
+            "@type": "Brand",
+            "name": "DonHoster"
+          },
+          "offers": {
+            "@type": "AggregateOffer",
+            "lowPrice": "23.00",
+            "highPrice": "89.00",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "url": "https://www.donhoster.com/cloud",
+            "priceValidUntil": "2025-12-31",
+            "offerCount": "4"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "reviewCount": "150"
+          }
+        })}
+      </script>
+
+      {/* Schema.org - Individual Offers */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "position": 1,
+              "name": "Cloud VPS Essential",
+              "description": "2 vCPU, 2GB RAM, 50GB SSD, 2TB Bandwidth",
+              "price": "23.00",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock",
+              "url": "https://my.donhoster.com/cart.php?a=add&pid=7"
+            },
+            {
+              "@type": "Offer",
+              "position": 2,
+              "name": "Cloud VPS Advanced",
+              "description": "2 vCPU, 4GB RAM, 80GB SSD, 3TB Bandwidth",
+              "price": "39.00",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock",
+              "url": "https://my.donhoster.com/cart.php?a=add&pid=21"
+            },
+            {
+              "@type": "Offer",
+              "position": 3,
+              "name": "Cloud VPS Performance",
+              "description": "4 vCPU, 8GB RAM, 120GB SSD, 4TB Bandwidth",
+              "price": "59.00",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock",
+              "url": "https://my.donhoster.com/cart.php?a=add&pid=22"
+            },
+            {
+              "@type": "Offer",
+              "position": 4,
+              "name": "Cloud VPS Ultra",
+              "description": "8 vCPU, 16GB RAM, 160GB SSD, 5TB Bandwidth",
+              "price": "89.00",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock",
+              "url": "https://my.donhoster.com/cart.php?a=add&pid=23"
+            }
+          ]
+        })}
+      </script>
+
+      {/* Schema.org - Service */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "serviceType": "Cloud VPS Hosting",
+          "name": "Cloud Virtual Private Server Hosting",
+          "description": "Scalable cloud VPS with guaranteed resources, full root access, and VMware virtualization",
+          "provider": {
+            "@type": "Organization",
+            "name": "DonHoster",
+            "url": "https://www.donhoster.com"
+          },
+          "areaServed": {
+            "@type": "Place",
+            "name": "Global"
+          },
+          "availableChannel": {
+            "@type": "ServiceChannel",
+            "serviceUrl": "https://www.donhoster.com/cloud",
+            "serviceLocation": {
+              "@type": "Place",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Miami",
+                "addressRegion": "FL",
+                "addressCountry": "US"
+              }
+            }
+          }
+        })}
+      </script>
+
+      {/* Schema.org - BreadcrumbList */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://www.donhoster.com"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Cloud VPS",
+              "item": "https://www.donhoster.com/cloud"
+            }
+          ]
+        })}
+      </script>
+
+      {/* Schema.org - FAQPage */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is Cloud Computing and how does it differ from traditional hosting?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Cloud Computing is a technology that enables access to computing resources (servers, storage, applications) over the internet in a scalable and flexible way. Unlike traditional hosting, it offers higher availability, automatic scaling, and pay-as-you-go, guaranteeing 99.9% uptime."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I scale my cloud server as my project grows?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Absolutely. Our cloud servers allow vertical and horizontal scaling in real-time. You can increase CPU, RAM, and storage on-demand with no downtime and pay according to usage."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What uptime guarantees do your cloud servers offer?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We offer a 99.9% uptime guarantee backed by SLA. Our redundant infrastructure in Miami includes multiple network connections, redundant power systems, and 24/7 monitoring to ensure maximum availability."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Which operating systems are available for cloud servers?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We offer a wide variety of operating systems: Ubuntu, CentOS, Debian, Windows Server, Red Hat Enterprise Linux, and many others. Preconfigured templates for apps like WordPress, Magento, and Joomla are also available."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is it possible to migrate my current website to your cloud platform?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, we provide free migration services for websites and applications. Our technical team handles data, settings, and app transfer without affecting your service availability."
+              }
+            }
+          ]
+        })}
+      </script>
+
+      {/* Google Tag Manager - Head */}
+      <script>
+        {`
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-57P7TBP');
+        `}
+      </script>
+
+      {/* DNS Prefetch and Preconnect for Performance */}
+      <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+      <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+      <link rel="dns-prefetch" href="https://my.donhoster.com" />
+      <link rel="preconnect" href="https://www.googletagmanager.com" />
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
+      {/* Preload Critical Images */}
+      <link 
+        rel="preload" 
+        as="image" 
+        href="https://images.pexels.com/photos/325229/pexels-photo-325229.jpeg" 
+      />
+
+      {/* Mobile App Meta Tags */}
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+      <meta name="apple-mobile-web-app-title" content="DonHoster Cloud" />
+      <meta name="format-detection" content="telephone=no" />
+      <meta name="theme-color" content="#9333ea" />
+
+      {/* Security */}
+      <meta name="referrer" content="no-referrer-when-downgrade" />
+    </Helmet>
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className={`min-h-screen pt-20 transition-colors duration-300 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}
     >
-      <Helmet>
-        <title>Cloud VPS Miami $23/month | DonHoster</title>
-        <meta 
-          name="description" 
-          content="Cloud VPS in Miami with Intel CPUs, NVMe SSD storage and VMware. Scalable, secure and with 24/7 support in Spanish. Plans starting at $23/month. Ideal for Spain and Latin America." 
-        />
-        <meta 
-          name="keywords" 
-          content="cloud vps miami, virtual servers spain, scalable vps, cloud computing, vmware hosting, ssd nvme vps, cloud servers" 
-        />
-      </Helmet>
-
       {/* Invisible H1 for SEO */}
       <div className="sr-only">
         <h1>Cloud VPS Miami USA - Scalable Virtual Servers with VMware and 24/7 Support</h1>
@@ -730,6 +991,7 @@ const CloudPage: React.FC<CloudPageProps> = ({ darkMode}) => {
         </div>
       </AnimatedSection>
     </motion.div>
+    </>
   );
 };
 
