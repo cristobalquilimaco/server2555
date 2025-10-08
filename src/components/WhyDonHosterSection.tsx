@@ -330,7 +330,7 @@ const WhyDonHosterSection: React.FC<WhyDonHosterSectionProps> = ({ darkMode }) =
         }
         
         .animate-scroll-infinite {
-          animation: scroll-infinite 5s linear infinite;
+          animation: scroll-infinite 20s linear infinite;
         }
         
         @keyframes spin-slow {
