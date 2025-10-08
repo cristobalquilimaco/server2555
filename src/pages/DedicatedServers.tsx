@@ -22,19 +22,19 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 
 interface FormData {
-  nombre: string;
+  name: string;
   email: string;
-  telefono: string;
-  tipoProyecto: string;
-  mensaje: string;
+  phone: string;
+  projectType: string;
+  message: string;
 }
 
 interface RequestData {
-  nombre: string;
+  name: string;
   email: string;
-  telefono: string;
-  tipoProyecto: string;
-  mensaje: string;
+  phone: string;
+  projectType: string;
+  message: string;
   captchaToken: string | null;
   timestamp: string;
   userIP: string;
@@ -67,11 +67,11 @@ interface ServerPageProps{
 
 const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
   const [formData, setFormData] = useState<FormData>({
-    nombre: '',
+    name: '',
     email: '',
-    telefono: '',
-    tipoProyecto: '',
-    mensaje: ''
+    phone: '',
+    projectType: '',
+    message: ''
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -91,7 +91,6 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
   const TIME_WINDOW_HOURS = 24;
   const MAX_MATH_ATTEMPTS = 3;
 
-  // Obtener IP del usuario al cargar el componente
   useEffect(() => {
     getUserIP();
     checkLocalAttempts();
@@ -108,7 +107,6 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
     }
   };
 
-  // Generar desafío matemático aleatorio
   const generateMathChallenge = (): MathChallenge => {
     const operations = [
       { op: '+', symbol: '+' },
@@ -150,7 +148,6 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
     };
   };
 
-  // Verificar intentos locales almacenados
   const checkLocalAttempts = () => {
     try {
       const stored = localStorage.getItem('formAttempts');
@@ -173,7 +170,6 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
     }
   };
 
-  // Registrar intento local
   const recordLocalAttempt = (success: boolean = false) => {
     try {
       const stored = localStorage.getItem('formAttempts');
@@ -220,30 +216,29 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
   };
 
   const validateForm = () => {
-    if (!formData.nombre.trim()) {
-      setMessage({ type: 'error', text: 'El nombre es requerido' });
+    if (!formData.name.trim()) {
+      setMessage({ type: 'error', text: 'Name is required' });
       return false;
     }
     if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) {
-      setMessage({ type: 'error', text: 'Ingresa un email válido' });
+      setMessage({ type: 'error', text: 'Please enter a valid email address' });
       return false;
     }
-    if (!formData.telefono.trim()) {
-      setMessage({ type: 'error', text: 'El teléfono es requerido' });
+    if (!formData.phone.trim()) {
+      setMessage({ type: 'error', text: 'Phone number is required' });
       return false;
     }
-    if (!formData.tipoProyecto) {
-      setMessage({ type: 'error', text: 'Selecciona el tipo de proyecto' });
+    if (!formData.projectType) {
+      setMessage({ type: 'error', text: 'Please select a project type' });
       return false;
     }
-    if (!formData.mensaje.trim()) {
-      setMessage({ type: 'error', text: 'Describe tu proyecto' });
+    if (!formData.message.trim()) {
+      setMessage({ type: 'error', text: 'Please describe your project' });
       return false;
     }
     return true;
   };
 
-  // Verificar si email existe
   const checkEmailExists = async (email: string): Promise<boolean> => {
     try {
       const checkData: Record<string, string> = {
@@ -259,7 +254,6 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
     }
   };
 
-  // Función principal para enviar datos a Google Sheets
   const submitToGoogleSheets = async (data: RequestData): Promise<SubmissionResult> => {
     const methods = [
       async () => {
@@ -320,15 +314,14 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
         const result = await method();
         return result;
       } catch (methodError) {
-        console.log('Método falló, probando siguiente:', methodError);
+        console.log('Method failed, trying next:', methodError);
         continue;
       }
     }
     
-    throw new Error('Todos los métodos de envío fallaron');
+    throw new Error('All submission methods failed');
   };
 
-  // Verificar respuesta matemática
   const validateMathChallenge = (): boolean => {
     if (!mathChallenge || !userMathAnswer.trim()) {
       return false;
@@ -338,13 +331,12 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
     return userAnswer === mathChallenge.answer;
   };
 
-  // Manejar envío de validación matemática
   const handleMathChallengeSubmit = () => {
     if (validateMathChallenge()) {
       setShowMathChallenge(false);
       setMathAttempts(0);
       setUserMathAnswer('');
-      setMessage({ type: 'success', text: 'Validación correcta. Enviando formulario...' });
+      setMessage({ type: 'success', text: 'Validation successful. Sending form...' });
       setTimeout(() => proceedWithFormSubmission(), 1000);
     } else {
       const newAttempts = mathAttempts + 1;
@@ -353,7 +345,7 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
       if (newAttempts >= MAX_MATH_ATTEMPTS) {
         setMessage({ 
           type: 'error', 
-          text: 'Demasiados intentos incorrectos. Por favor, actualiza la página e intenta nuevamente.' 
+          text: 'Too many incorrect attempts. Please refresh the page and try again.' 
         });
         setShowMathChallenge(false);
         recordLocalAttempt(false);
@@ -362,7 +354,7 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
       
       setMessage({ 
         type: 'error', 
-        text: `Respuesta incorrecta. Intento ${newAttempts} de ${MAX_MATH_ATTEMPTS}` 
+        text: `Incorrect answer. Attempt ${newAttempts} of ${MAX_MATH_ATTEMPTS}` 
       });
       setUserMathAnswer('');
       
@@ -370,7 +362,6 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
     }
   };
 
-  // Proceder con el envío real después de validación matemática
   const proceedWithFormSubmission = async () => {
     setIsSubmitting(true);
     
@@ -378,7 +369,7 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
       if (showCaptcha) {
         const captchaToken = recaptchaRef.current?.getValue();
         if (!captchaToken) {
-          setMessage({ type: 'error', text: 'Por favor, completa la verificación reCAPTCHA' });
+          setMessage({ type: 'error', text: 'Please complete the reCAPTCHA verification' });
           setIsSubmitting(false);
           return;
         }
@@ -387,10 +378,10 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
         await submitForm();
       }
     } catch (error) {
-      console.error('Error en proceedWithFormSubmission:', error);
+      console.error('Error in proceedWithFormSubmission:', error);
       setMessage({
         type: 'error',
-        text: 'Error al procesar el formulario. Intenta nuevamente.'
+        text: 'Error processing the form. Please try again.'
       });
     } finally {
       setIsSubmitting(false);
@@ -404,7 +395,7 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
         if (emailExists) {
           setMessage({
             type: 'error',
-            text: 'Este correo electrónico ya está registrado. Por favor, usa un correo diferente.'
+            text: 'This email is already registered. Please use a different email.'
           });
           recordLocalAttempt(false);
           return;
@@ -412,27 +403,27 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
       }
 
       const requestData: RequestData = {
-        nombre: formData.nombre,
+        name: formData.name,
         email: formData.email,
-        telefono: formData.telefono,
-        tipoProyecto: formData.tipoProyecto,
-        mensaje: formData.mensaje,
+        phone: formData.phone,
+        projectType: formData.projectType,
+        message: formData.message,
         captchaToken,
         timestamp: new Date().toISOString(),
         userIP: userIP
       };
 
-      console.log('Enviando datos:', requestData);
+      console.log('Sending data:', requestData);
 
       const result = await submitToGoogleSheets(requestData);
       handleSubmissionResult(result);
       
     } catch (error) {
-      console.error('Error completo en submitForm:', error);
+      console.error('Error in submitForm:', error);
       recordLocalAttempt(false);
       setMessage({
         type: 'error',
-        text: 'Error de conexión. Por favor, intenta nuevamente.'
+        text: 'Connection error. Please try again.'
       });
     }
   };
@@ -441,15 +432,15 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
     if (result.success) {
       setMessage({
         type: 'success',
-        text: result.message || 'Solicitud enviada correctamente. Te contactaremos pronto.'
+        text: result.message || 'Request sent successfully. We will contact you soon.'
       });
       
       setFormData({
-        nombre: '',
+        name: '',
         email: '',
-        telefono: '',
-        tipoProyecto: '',
-        mensaje: ''
+        phone: '',
+        projectType: '',
+        message: ''
       });
       
       recordLocalAttempt(true);
@@ -468,18 +459,18 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
       if (result.emailExists) {
         setMessage({
           type: 'error',
-          text: result.message || 'Este correo electrónico ya está registrado. Por favor, usa un correo diferente.'
+          text: result.message || 'This email is already registered. Please use a different email.'
         });
       } else if (result.requiresCaptcha) {
         setShowCaptcha(true);
         setMessage({
           type: 'warning',
-          text: result.message || 'Se han detectado múltiples intentos. Por favor, completa la verificación.'
+          text: result.message || 'Multiple attempts detected. Please complete the verification.'
         });
       } else {
         setMessage({
           type: 'error',
-          text: result.message || 'Error en el servidor. Por favor, intenta nuevamente.'
+          text: result.message || 'Server error. Please try again.'
         });
       }
     }
@@ -500,28 +491,27 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
     setUserMathAnswer('');
     setMathAttempts(0);
   };
-
-  const serverPlans = [
+const serverPlans = [
     {
-      name: 'Servidor Dedicado Small - Miami',
+      name: 'Small Dedicated Server - Miami',
       price: '60.00',
       setup: '0',
       specs: {
         cpu: 'Intel Dual Xeon 3.0 GHz',
         ram: '4 GB',
         storage: '500 GB HDD',
-        bandwidth: 'Ilimitado',
+        bandwidth: 'Unlimited',
         connection: '1 Gbps'
       },
       features: [
-        '1 IP dedicada (IPv4)',
-        'Acceso root / Escritorio remoto',
-        'Soporte técnico 24/7'
+        '1 Dedicated IP (IPv4)',
+        'Root access / Remote desktop',
+        '24/7 Technical support'
       ],
       url: "https://my.donhoster.com/cart.php?a=add&pid=2&_gl=1*124z2fw*_gcl_au*MjEwNTg2ODAwMS4xNzUyMDIxODc2*_ga*MTg1NzgxNzE3MS4xNzA4MjcxMTE4*_ga_E8HRCWRKGG*czE3NTYwNDE0ODYkbzE1NyRnMSR0MTc1NjA0MzQ1MiRqNjAkbDAkaDA."
     },
     {
-      name: 'Servidor Dedicado Medium - Miami',
+      name: 'Medium Dedicated Server - Miami',
       price: '82.00',
       setup: '0',
       popular: true,
@@ -529,80 +519,83 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
         cpu: 'Intel Dual Xeon 3.0 GHz',
         ram: '8 GB',
         storage: '1 TB HDD',
-        bandwidth: 'Ilimitado',
+        bandwidth: 'Unlimited',
         connection: '1 Gbps'
       },
       features: [
-        '1 IP dedicada (IPv4)',
-        'Acceso root / Escritorio remoto',
-        'Soporte técnico 24/7'
+        '1 Dedicated IP (IPv4)',
+        'Root access / Remote desktop',
+        '24/7 Technical support'
       ],
       url: "https://my.donhoster.com/cart.php?a=add&pid=8&_gl=1*1s6hjcc*_gcl_au*MjEwNTg2ODAwMS4xNzUyMDIxODc2*_ga*MTg1NzgxNzE3MS4xNzA4MjcxMTE4*_ga_E8HRCWRKGG*czE3NTYwNDE0ODYkbzE1NyRnMSR0MTc1NjA0MzQ1MiRqNjAkbDAkaDA."
     },
     {
-      name: 'Servidor Dedicado Large - Miami',
+      name: 'Large Dedicated Server - Miami',
       price: '120.00',
       setup: '0',
       specs: {
         cpu: 'Intel Dual Xeon 3.0 GHz',
         ram: '16 GB',
         storage: '1 TB HDD',
-        bandwidth: 'Ilimitado',
+        bandwidth: 'Unlimited',
         connection: '1 Gbps'
       },
       features: [
-        '1 IP dedicada (IPv4)',
-        'Acceso root / Escritorio remoto',
-        'Soporte técnico 24/7'
+        '1 Dedicated IP (IPv4)',
+        'Root access / Remote desktop',
+        '24/7 Technical support'
       ],
       url: "https://my.donhoster.com/cart.php?a=add&pid=9&_gl=1*1s6hjcc*_gcl_au*MjEwNTg2ODAwMS4xNzUyMDIxODc2*_ga*MTg1NzgxNzE3MS4xNzA4MjcxMTE4*_ga_E8HRCWRKGG*czE3NTYwNDE0ODYkbzE1NyRnMSR0MTc1NjA0MzQ1MiRqNjAkbDAkaDA."
     },
     {
-      name: 'Servidor Dedicado Extra Large - Miami',
+      name: 'Extra Large Dedicated Server - Miami',
       price: '220.00',
       setup: '0',
       specs: {
         cpu: 'Intel Dual Xeon 3.0 GHz',
         ram: '32 GB',
         storage: '2x1 TB HDD',
-        bandwidth: 'Ilimitado',
+        bandwidth: 'Unlimited',
         connection: '1 Gbps'
       },
       features: [
-        '1 IP dedicada (IPv4)',
-        'Acceso root / Escritorio remoto',
-        'Soporte técnico 24/7'
+        '1 Dedicated IP (IPv4)',
+        'Root access / Remote desktop',
+        '24/7 Technical support'
       ],
       url: "https://my.donhoster.com/cart.php?a=add&pid=10&_gl=1*1s6hjcc*_gcl_au*MjEwNTg2ODAwMS4xNzUyMDIxODc2*_ga*MTg1NzgxNzE3MS4xNzA4MjcxMTE4*_ga_E8HRCWRKGG*czE3NTYwNDE0ODYkbzE1NyRnMSR0MTc1NjA0MzQ1MiRqNjAkbDAkaDA."
     }
   ];
 
+
   const useCases = [
     {
       icon: Monitor,
-      title: 'Empresas Corporativas',
-      description: 'Sitios web corporativos con alto tráfico, aplicaciones internas y sistemas de gestión empresarial.'
+      title: 'Corporate Companies',
+      description: 'Corporate websites with high traffic, internal applications, and enterprise management systems.'
     },
     {
       icon: Globe,
       title: 'E-commerce',
-      description: 'Tiendas online con miles de productos, procesamiento de pagos y gestión de inventarios.'
+      description: 'Online stores with thousands of products, payment processing, and inventory management.'
     },
     {
       icon: Database,
-      title: 'Aplicaciones SaaS',
-      description: 'Software como servicio, APIs de alto rendimiento y aplicaciones web complejas.'
+      title: 'SaaS Applications',
+      description: 'Software as a service, high-performance APIs, and complex web applications.'
     }
   ];
 
+
   const datacenterFeatures = [
-    'Certificación Tier III+',
-    'Redundancia eléctrica N+1',
-    'Climatización avanzada',
-    'Seguridad física 24/7',
-    'Conectividad múltiple',
-    'Monitoreo continuo'
+    'Tier III+ Certification',
+    'N+1 Power Redundancy',
+    'Advanced Climate Control',
+    '24/7 Physical Security',
+    'Multiple Connectivity',
+    'Continuous Monitoring'
   ];
+
 
   return (
     <motion.div
@@ -625,7 +618,7 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
             transition={{ duration: 0.8 }}
             className="text-4xl lg:text-6xl font-bold mb-6"
           >
-            Servidores Dedicados de <span className="text-purple-400">Alto Rendimiento</span> en Miami
+            High-Performance Dedicated <span className="text-purple-400">Servers</span> in Miami
           </motion.h1>
           
           <motion.p
@@ -634,11 +627,11 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl lg:text-2xl mb-8 text-gray-200 max-w-3xl mx-auto"
           >
-            Potencia completa para tu negocio. Hardware premium, conectividad excepcional 
-            y soporte técnico especializado en español.
+            Full power for your business. Premium hardware, exceptional connectivity, and specialized technical support in Spanish.
           </motion.p>
         </div>
       </section>
+
 
       {/* Server Plans */}
       <AnimatedSection className={`py-16 lg:py-24 transition-colors duration-300 ${
@@ -649,14 +642,15 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
             <h2 className={`text-3xl lg:text-4xl font-bold mb-4 transition-colors duration-300 ${
               darkMode ? 'text-white' : 'text-gray-900'
             }`}>
-              Planes de Servidores Dedicados
+              Dedicated Server Plans
             </h2>
             <p className={`text-xl transition-colors duration-300 ${
               darkMode ? 'text-gray-300' : 'text-gray-600'
             }`}>
-              Potencia y rendimiento garantizado para tus proyectos más exigentes
+              Guaranteed power and performance for your most demanding projects
             </p>
           </div>
+
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {serverPlans.map((plan, index) => (
@@ -677,10 +671,11 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                     <span className="bg-yellow-400 text-gray-900 px-4 py-2 rounded-full text-sm font-bold">
-                      Más Popular
+                      Most Popular
                     </span>
                   </div>
                 )}
+
 
                 <div className="text-center mb-8">
                   <Server className={`w-12 h-12 mx-auto mb-4 ${
@@ -710,7 +705,7 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
                         ? 'text-gray-300' 
                         : 'text-gray-600'
                     }`}>
-                      /mes
+                      /month
                     </span>
                   </div>
                   <p className={`text-sm ${
@@ -724,6 +719,7 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
                   </p>
                 </div>
 
+
                 {/* Specifications */}
                 <div className="mb-6">
                   <h4 className={`font-semibold mb-3 ${
@@ -733,7 +729,7 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
                       ? 'text-white' 
                       : 'text-gray-900'
                   }`}>
-                    Especificaciones:
+                    Specifications:
                   </h4>
                   <div className="space-y-2 text-sm">
                     <div className="flex items-center space-x-2">
@@ -782,7 +778,7 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
                         : darkMode 
                         ? 'text-white' 
                         : 'text-gray-900'
-                    }>Ancho de banda: {plan.specs.bandwidth}</span>
+                    }>Bandwidth: {plan.specs.bandwidth}</span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Globe className={`w-4 h-4 ${
@@ -794,10 +790,11 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
                         : darkMode 
                         ? 'text-white' 
                         : 'text-gray-900'
-                    }>Conexión: {plan.specs.connection}</span>
+                    }>Connection: {plan.specs.connection}</span>
                     </div>
                   </div>
                 </div>
+
 
                 {/* Features */}
                 <div className="mb-8">
@@ -808,7 +805,7 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
                       ? 'text-white' 
                       : 'text-gray-900'
                   }`}>
-                    Incluido:
+                    Included:
                   </h4>
                   <ul className="space-y-2">
                     {plan.features.map((feature, featureIndex) => (
@@ -817,12 +814,12 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
                           plan.popular ? 'text-purple-200' : 'text-green-500'
                         }`} />
                         <span className={
-                      plan.popular 
-                        ? 'text-white' 
-                        : darkMode 
-                        ? 'text-white' 
-                        : 'text-gray-900'
-                    }>{feature}</span>
+                        plan.popular 
+                          ? 'text-white' 
+                          : darkMode 
+                          ? 'text-white' 
+                          : 'text-gray-900'
+                      }>{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -838,7 +835,7 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
                       : 'bg-purple-600 text-white hover:bg-purple-700'
                   }`}
                 >
-                  <span>Contratar Ahora</span>
+                  <span>Hire Now</span>
                   <ArrowRight className="w-4 h-4" />
                 </motion.button>
               </motion.div>
@@ -846,6 +843,7 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
           </div>
         </div>
       </AnimatedSection>
+
 
       {/* Datacenter Section */}
       <AnimatedSection className={`py-16 transition-colors duration-300 ${
@@ -857,13 +855,12 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
               <h2 className={`text-4xl font-bold mb-4 transition-colors duration-300 ${
                 darkMode ? 'text-white' : 'text-gray-900'
               }`}>
-                Data Center de Miami
+                Miami Data Center
               </h2>
               <p className={`text-xl mb-8 transition-colors duration-300 ${
                 darkMode ? 'text-gray-300' : 'text-gray-600'
               }`}>
-                Nuestros servidores están alojados en un data center de clase mundial 
-                en Miami, con conexiones optimizadas para España y Latinoamérica.
+                Our servers are hosted in a world-class Miami data center, optimized connections for Spain and Latin America.
               </p>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
@@ -890,11 +887,12 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
                   whileTap={{ scale: 0.95 }}
                   className="px-6 py-3 bg-purple-600 text-white font-semibold rounded-lg hover:bg-purple-700 transition-colors duration-200 flex items-center space-x-2"
                 >
-                  <span>Ver Certificaciones</span>
+                  <span>See Certifications</span>
                   <ArrowRight className="w-4 h-4" />
                 </motion.button>
               </Link>
             </div>
+
 
             <div className="relative">
               <motion.img
@@ -902,7 +900,7 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8 }}
                 src="https://images.pexels.com/photos/2881232/pexels-photo-2881232.jpeg"
-                alt="Data Center Miami"
+                alt="Miami Data Center"
                 className="rounded-2xl shadow-xl"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-purple-600/20 to-transparent rounded-2xl"></div>
@@ -910,6 +908,7 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
           </div>
         </div>
       </AnimatedSection>
+
 
       {/* Use Cases */}
       <AnimatedSection className={`py-16 lg:py-24 transition-colors duration-300 ${
@@ -920,14 +919,15 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
             <h2 className={`text-3xl lg:text-4xl font-bold mb-4 transition-colors duration-300 ${
               darkMode ? 'text-white' : 'text-gray-900'
             }`}>
-              Casos de Uso
+              Use Cases
             </h2>
             <p className={`text-xl transition-colors duration-300 ${
               darkMode ? 'text-gray-300' : 'text-gray-600'
             }`}>
-              Perfectos para proyectos empresariales que requieren máximo rendimiento
+              Perfect for enterprise projects requiring maximum performance
             </p>
           </div>
+
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {useCases.map((useCase, index) => {
@@ -971,25 +971,28 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
         </div>
       </AnimatedSection>
 
+
       {/* Quote Form */}
       <AnimatedSection className="py-16 lg:py-24 bg-gradient-to-r from-purple-600 to-purple-800">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center text-white">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">
-              ¿Necesitas una configuración personalizada?
+              Need a Customized Setup?
             </h2>
             <p className="text-xl mb-8 opacity-90">
-              Nuestros expertos te ayudarán a encontrar la solución perfecta para tu proyecto.
+              Our experts will help you find the perfect solution for your project.
             </p>
+
 
             <form onSubmit={handleSubmit} className="bg-white/10 backdrop-blur-md p-8 rounded-2xl">
               {/* Attempt Counter */}
               {attemptCount > 0 && (
                 <div className="mb-4 p-3 bg-yellow-500/20 border border-yellow-500/30 rounded-lg text-center text-sm">
-                  Intentos: {attemptCount} de {MAX_ATTEMPTS} 
-                  {attemptCount >= MAX_ATTEMPTS && ' - Verificación requerida'}
+                  Attempts: {attemptCount} of {MAX_ATTEMPTS} 
+                  {attemptCount >= MAX_ATTEMPTS && ' - Verification required'}
                 </div>
               )}
+
 
               {/* Math Challenge Modal */}
               {showMathChallenge && mathChallenge && (
@@ -1019,14 +1022,15 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
                       <h3 className={`text-2xl font-bold mb-2 ${
                         darkMode ? 'text-white' : 'text-gray-900'
                       }`}>
-                        Verificación Anti-Spam
+                        Anti-Spam Verification
                       </h3>
                       <p className={`${
                         darkMode ? 'text-gray-300' : 'text-gray-600'
                       }`}>
-                        Para confirmar que no eres un robot, resuelve esta operación:
+                        To confirm you are not a robot, solve this operation:
                       </p>
                     </div>
+
 
                     <div className={`rounded-xl p-6 mb-6 text-center ${
                       darkMode 
@@ -1046,7 +1050,7 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
                         type="number"
                         value={userMathAnswer}
                         onChange={(e) => setUserMathAnswer(e.target.value)}
-                        placeholder="Tu respuesta..."
+                        placeholder="Your answer..."
                         className={`w-full px-4 py-3 rounded-lg border-2 focus:outline-none text-center text-xl font-semibold ${
                           darkMode
                             ? 'bg-gray-700 border-purple-600 focus:border-purple-500 text-purple-400'
@@ -1062,6 +1066,7 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
                       />
                     </div>
 
+
                     {mathAttempts > 0 && (
                       <div className={`mb-4 p-3 rounded-lg text-center ${
                         darkMode
@@ -1071,10 +1076,11 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
                         <p className={`text-sm ${
                           darkMode ? 'text-red-400' : 'text-red-600'
                         }`}>
-                          Intento {mathAttempts} de {MAX_MATH_ATTEMPTS}
+                          Attempt {mathAttempts} of {MAX_MATH_ATTEMPTS}
                         </p>
                       </div>
                     )}
+
 
                     <div className="flex space-x-3">
                       <motion.button
@@ -1093,7 +1099,7 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
                             : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
                         }`}
                       >
-                        Cancelar
+                        Cancel
                       </motion.button>
                       <motion.button
                         type="button"
@@ -1102,12 +1108,13 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
                         whileTap={{ scale: 0.95 }}
                         className="flex-1 px-4 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors duration-200 font-semibold"
                       >
-                        Verificar
+                        Verify
                       </motion.button>
                     </div>
                   </motion.div>
                 </motion.div>
               )}
+
 
               {/* Message Display */}
               {message.text && (
@@ -1125,13 +1132,14 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
                 </motion.div>
               )}
 
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <input
                   type="text"
                   name="nombre"
                   value={formData.nombre}
                   onChange={handleInputChange}
-                  placeholder="Nombre completo *"
+                  placeholder="Full name *"
                   required
                   className="px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:outline-none focus:border-white/50 focus:bg-white/30 transition-colors duration-300"
                 />
@@ -1140,7 +1148,7 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  placeholder="Email empresarial *"
+                  placeholder="Business email *"
                   required
                   className="px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:outline-none focus:border-white/50 focus:bg-white/30 transition-colors duration-300"
                 />
@@ -1149,7 +1157,7 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
                   name="telefono"
                   value={formData.telefono}
                   onChange={handleInputChange}
-                  placeholder="Teléfono *"
+                  placeholder="Phone *"
                   required
                   className="px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:outline-none focus:border-white/50 focus:bg-white/30 transition-colors duration-300"
                 />
@@ -1160,11 +1168,11 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
                   required
                   className="px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white focus:outline-none focus:border-white/50 focus:bg-white/30 transition-colors duration-300"
                 >
-                  <option className='text-purple-500' value="">Tipo de proyecto *</option>
-                  <option className='text-purple-500' value="corporate">Sitio Corporativo</option>
+                  <option className='text-purple-500' value="">Project type *</option>
+                  <option className='text-purple-500' value="corporate">Corporate Site</option>
                   <option className='text-purple-500' value="ecommerce">E-commerce</option>
-                  <option className='text-purple-500' value="saas">Aplicación SaaS</option>
-                  <option className='text-purple-500' value="other">Otro</option>
+                  <option className='text-purple-500' value="saas">SaaS Application</option>
+                  <option className='text-purple-500' value="other">Other</option>
                 </select>
               </div>
               
@@ -1172,11 +1180,12 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
                 name="mensaje"
                 value={formData.mensaje}
                 onChange={handleInputChange}
-                placeholder="Cuéntanos sobre tu proyecto y requisitos específicos... *"
+                placeholder="Tell us about your project and specific requirements... *"
                 rows={4}
                 required
                 className="w-full mt-6 px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:outline-none focus:border-white/50 focus:bg-white/30 transition-colors duration-300"
               ></textarea>
+
 
               {/* reCAPTCHA */}
               {showCaptcha && (
@@ -1203,11 +1212,11 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
                 {isSubmitting ? (
                   <>
                     <Loader2 className="w-5 h-5 animate-spin" />
-                    <span>Enviando...</span>
+                    <span>Sending...</span>
                   </>
                 ) : (
                   <>
-                    <span>Solicitar Cotización</span>
+                    <span>Request a Quote</span>
                     <ArrowRight className="w-5 h-5" />
                   </>
                 )}
@@ -1219,5 +1228,6 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
     </motion.div>
   );
 };
+
 
 export default DedicatedServers;

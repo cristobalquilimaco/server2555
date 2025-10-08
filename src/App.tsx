@@ -5,11 +5,12 @@ import LoadingScreen from './components/LoadingScreen';
 import Home from './pages/Home';
 import DedicatedServers from './pages/DedicatedServers';
 import WebHosting from './pages/WebHosting';
-import Contact from './pages/Contact';
 import Footer from './components/Footer';
 import VPSPage from './pages/VPSPage';
 import CloudPage from './pages/CloudPage';
 import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
+import ZohoSalesIQ from './components/ZohoSalesIQ';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -42,8 +43,9 @@ function App() {
           <Route path="/vps" element={<VPSPage darkMode={darkMode} />} />
           <Route path="/cloud" element={<CloudPage darkMode={darkMode} />} />
           <Route path="/about" element={<AboutPage darkMode={darkMode} />} />
-          <Route path="/contact" element={<Contact darkMode={darkMode} />} />
+          <Route path="/contact" element={<ContactPage darkMode={darkMode} />} />
         </Routes>
+        <ZohoSalesIQ />
         <Footer darkMode={darkMode} />
       </div>
     </Router>
