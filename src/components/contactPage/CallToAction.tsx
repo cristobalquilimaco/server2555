@@ -5,6 +5,19 @@ interface CallToActionProps {
   onContactClick: () => void;
 }
 
+// Declaracion global para extender windows
+declare global {
+  interface Window {
+    $zoho?: {
+      salesiq?: {
+        chat: {
+          start: () => void
+        }
+      } 
+    }
+  }
+}
+
 const CallToAction: React.FC<CallToActionProps> = ({ onContactClick }) => {
 
   // 🔹 Nueva función que abre el chat de Zoho SalesIQ
@@ -12,7 +25,7 @@ const CallToAction: React.FC<CallToActionProps> = ({ onContactClick }) => {
     if (window.$zoho && window.$zoho.salesiq) {
       window.$zoho.salesiq.chat.start(); // abre el chat
     } else {
-      console.warn("Zoho SalesIQ no está disponible todavía");
+      console.warn("el chat no esta disponible");
     }
   };
 
