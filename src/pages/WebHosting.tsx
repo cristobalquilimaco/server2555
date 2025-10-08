@@ -10,6 +10,7 @@ import {
   Mail,
   ChevronDown
 } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 
 interface WebHostingProps {
   darkMode: boolean;
@@ -176,6 +177,365 @@ const WebHosting: React.FC<WebHostingProps> = ({ darkMode }) => {
   ];
 
   return (
+    <>
+<Helmet>
+  {/* Meta Tags Básicos */}
+  <title>Web Hosting cPanel | DonHoster</title>
+  <meta
+    name="description"
+    content="Web Hosting Miami with cPanel hosting, free SSL & WordPress optimization. Unlimited bandwidth, automatic backups, 24/7 support from $2.60/mo. 99.9% uptime guaranteed."
+  />
+  <meta
+    name="keywords"
+    content="web hosting miami, cpanel hosting, wordpress hosting, cheap hosting, ssl hosting, shared hosting, website hosting, hosting plans miami"
+  />
+  <meta name="author" content="DonHoster" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow" />
+  <meta name="bingbot" content="index, follow" />
+  
+  {/* Canonical URL */}
+  <link rel="canonical" href="https://www.donhoster.com/web-hosting" />
+  
+  {/* Idioma y Geolocalización */}
+  <meta name="language" content="English" />
+  <meta name="geo.region" content="US-FL" />
+  <meta name="geo.placename" content="Miami" />
+  <meta name="geo.position" content="25.7617;-80.1918" />
+  <meta name="ICBM" content="25.7617, -80.1918" />
+  
+  {/* Hreflang */}
+  <link rel="alternate" hrefLang="en" href="https://www.donhoster.com/web-hosting" />
+  <link rel="alternate" hrefLang="es" href="https://www.donhoster.es/web-hosting" />
+  <link rel="alternate" hrefLang="x-default" href="https://www.donhoster.com/web-hosting" />
+  
+  {/* Open Graph (Facebook, LinkedIn) */}
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Web Hosting Miami | cPanel Hosting with SSL & WordPress - DonHoster" />
+  <meta
+    property="og:description"
+    content="Web Hosting Miami with cPanel, free SSL & WordPress optimization. Unlimited bandwidth, automatic backups, 24/7 support from $2.60/mo. 99.9% uptime."
+  />
+  <meta property="og:image" content="https://www.donhoster.com/images/web-hosting-og.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="DonHoster Web Hosting Miami - cPanel & WordPress Hosting" />
+  <meta property="og:url" content="https://www.donhoster.com/web-hosting" />
+  <meta property="og:site_name" content="DonHoster" />
+  <meta property="og:locale" content="en_US" />
+  
+  {/* Twitter Cards */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Web Hosting Miami | cPanel Hosting with SSL & WordPress - DonHoster" />
+  <meta
+    name="twitter:description"
+    content="Web Hosting Miami with cPanel, free SSL & WordPress optimization. Unlimited bandwidth, automatic backups, 24/7 support from $2.60/mo."
+  />
+  <meta name="twitter:image" content="https://www.donhoster.com/images/web-hosting-twitter.jpg" />
+  <meta name="twitter:image:alt" content="DonHoster Web Hosting Miami - cPanel & WordPress Hosting" />
+  
+  {/* Additional Meta Tags */}
+  <meta name="theme-color" content="#7c3aed" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="DonHoster Hosting" />
+  
+  {/* Schema.org - WebPage with Breadcrumb */}
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Web Hosting Miami | cPanel & WordPress Hosting",
+      "url": "https://www.donhoster.com/web-hosting",
+      "description": "Reliable and affordable web hosting in Miami with cPanel, free SSL certificates, WordPress optimization, and 24/7 technical support. Perfect for personal and business websites.",
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.donhoster.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Web Hosting",
+            "item": "https://www.donhoster.com/web-hosting"
+          }
+        ]
+      }
+    })}
+  </script>
+  
+  {/* Schema.org - Product Offers */}
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Web Hosting Plans Miami",
+      "description": "Affordable cPanel web hosting plans in Miami with free SSL, unlimited bandwidth, and WordPress optimization",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "Product",
+            "name": "Small Hosting",
+            "description": "Entry-level web hosting with cPanel, 1.5GB storage, 15 email accounts, free SSL, and unlimited bandwidth",
+            "brand": {
+              "@type": "Brand",
+              "name": "DonHoster"
+            },
+            "offers": {
+              "@type": "Offer",
+              "price": "2.60",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock",
+              "priceValidUntil": "2025-12-31",
+              "url": "https://my.donhoster.com/cart.php?a=add&pid=15"
+            },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.7",
+              "reviewCount": "342"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "Product",
+            "name": "Medium cPanel Hosting",
+            "description": "Medium web hosting with cPanel, 2GB storage, 25 email accounts, free SSL, and unlimited bandwidth",
+            "brand": {
+              "@type": "Brand",
+              "name": "DonHoster"
+            },
+            "offers": {
+              "@type": "Offer",
+              "price": "3.50",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock",
+              "priceValidUntil": "2025-12-31",
+              "url": "https://my.donhoster.com/cart.php?a=add&pid=17"
+            },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.8",
+              "reviewCount": "428"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "Product",
+            "name": "Large cPanel Hosting",
+            "description": "Popular web hosting with cPanel, 3GB storage, 30 email accounts, free SSL, and unlimited bandwidth",
+            "brand": {
+              "@type": "Brand",
+              "name": "DonHoster"
+            },
+            "offers": {
+              "@type": "Offer",
+              "price": "7.50",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock",
+              "priceValidUntil": "2025-12-31",
+              "url": "https://my.donhoster.com/cart.php?a=add&pid=18"
+            },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.9",
+              "reviewCount": "567"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "Product",
+            "name": "Extra cPanel Hosting",
+            "description": "Premium web hosting with cPanel, 5GB storage, 40 email accounts, free SSL, and unlimited bandwidth",
+            "brand": {
+              "@type": "Brand",
+              "name": "DonHoster"
+            },
+            "offers": {
+              "@type": "Offer",
+              "price": "11.99",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock",
+              "priceValidUntil": "2025-12-31",
+              "url": "https://my.donhoster.com/cart.php?a=add&pid=20"
+            },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.9",
+              "reviewCount": "389"
+            }
+          }
+        }
+      ]
+    })}
+  </script>
+  
+  {/* Schema.org - FAQPage */}
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What does the free migration include?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We completely migrate your website from your current provider, including files, databases, emails, and configurations. The process is transparent with no downtime."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does it take to activate my hosting?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Your account is activated instantly after payment. You will receive cPanel access details in less than 5 minutes to start configuring your website."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer uptime guarantee?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we guarantee 99.9% uptime. If we don't meet this promise, we automatically compensate the lost time with credit to your account."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I change plans anytime?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely. You can upgrade or change your plan at any time from your control panel. Changes are immediate and hassle-free."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is SSL certificate included?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, all our plans include a free SSL certificate with automatic renewal. For higher plans, we include premium and wildcard SSL."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What technical support do you offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "24/7 technical support in English via chat, email, and phone. Our team specializes in hosting and can resolve any technical query."
+          }
+        }
+      ]
+    })}
+  </script>
+  
+  {/* Schema.org - Service */}
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Web Hosting",
+      "name": "cPanel Web Hosting Miami",
+      "description": "Professional web hosting services with cPanel control panel, free SSL certificates, WordPress optimization, unlimited bandwidth, and 24/7 technical support",
+      "provider": {
+        "@type": "Organization",
+        "name": "DonHoster",
+        "url": "https://www.donhoster.com"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Miami, Florida, United States"
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "lowPrice": "2.60",
+        "highPrice": "11.99",
+        "priceCurrency": "USD",
+        "offerCount": "4"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Web Hosting Plans",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Small Hosting"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Medium cPanel Hosting"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Large cPanel Hosting"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Extra cPanel Hosting"
+            }
+          }
+        ]
+      }
+    })}
+  </script>
+  
+  {/* Schema.org - SoftwareApplication (WordPress) */}
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "WordPress Optimized Hosting",
+      "applicationCategory": "WebApplication",
+      "operatingSystem": "Linux",
+      "offers": {
+        "@type": "Offer",
+        "price": "2.60",
+        "priceCurrency": "USD"
+      },
+      "description": "WordPress specialized hosting with 1-click installation, premium themes, security plugins, automatic updates, and optimized cache for maximum performance"
+    })}
+  </script>
+  
+  {/* Schema.org - Organization Review */}
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "DonHoster Web Hosting",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "1726",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    })}
+  </script>
+</Helmet>
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -693,6 +1053,7 @@ const WebHosting: React.FC<WebHostingProps> = ({ darkMode }) => {
         </div>
       </section>
     </motion.div>
+    </>
   );
 };
 

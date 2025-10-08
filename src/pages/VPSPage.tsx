@@ -11,6 +11,7 @@ import {
   Database,
   ChevronDown
 } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 
 interface VPSPageProps {
   darkMode: boolean;
@@ -151,6 +152,329 @@ const VPSPage: React.FC<VPSPageProps> = ({ darkMode }) => {
   ];
 
   return (
+    <>
+    <Helmet>
+        {/* Meta Tags Básicos */}
+        <title>VPS Hosting Miami | Fast & Scalable Virtual Servers - DonHoster</title>
+        <meta
+          name="description"
+          content="VPS Hosting Miami with fast & scalable virtual servers. Dedicated resources, root access, unlimited bandwidth. 24/7 support from $14/mo. Perfect for growing projects."
+        />
+        <meta
+          name="keywords"
+          content="vps miami, virtual private server, vps hosting, cloud vps, scalable servers, linux vps, windows vps, managed vps, cheap vps miami"
+        />
+        <meta name="author" content="DonHoster" />
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow" />
+        <meta name="bingbot" content="index, follow" />
+        
+        {/* Canonical URL */}
+        <link rel="canonical" href="https://www.donhoster.com/vps" />
+        
+        {/* Idioma y Geolocalización */}
+        <meta name="language" content="English" />
+        <meta name="geo.region" content="US-FL" />
+        <meta name="geo.placename" content="Miami" />
+        <meta name="geo.position" content="25.7617;-80.1918" />
+        <meta name="ICBM" content="25.7617, -80.1918" />
+        
+        {/* Hreflang */}
+        <link rel="alternate" hrefLang="en" href="https://www.donhoster.com/vps" />
+        <link rel="alternate" hrefLang="es" href="https://donhoster.es/vps-hosting" />
+        <link rel="alternate" hrefLang="x-default" href="https://www.donhoster.com/vps" />
+        
+        {/* Open Graph (Facebook, LinkedIn) */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="VPS Hosting Miami | Fast & Scalable Virtual Servers - DonHoster" />
+        <meta
+          property="og:description"
+          content="VPS Hosting Miami with fast & scalable virtual servers. Dedicated resources, root access, unlimited bandwidth. 24/7 support from $14/mo."
+        />
+        <meta property="og:image" content="https://www.donhoster.com/images/vps-miami-og.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="DonHoster VPS Hosting Miami - Virtual Private Servers" />
+        <meta property="og:url" content="https://www.donhoster.com/vps" />
+        <meta property="og:site_name" content="DonHoster" />
+        <meta property="og:locale" content="en_US" />
+        
+        {/* Twitter Cards */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="VPS Hosting Miami | Fast & Scalable Virtual Servers - DonHoster" />
+        <meta
+          name="twitter:description"
+          content="VPS Hosting Miami with fast & scalable virtual servers. Dedicated resources, root access, unlimited bandwidth. 24/7 support from $14/mo."
+        />
+        <meta name="twitter:image" content="https://www.donhoster.com/images/vps-miami-twitter.jpg" />
+        <meta name="twitter:image:alt" content="DonHoster VPS Hosting Miami - Virtual Private Servers" />
+        
+        {/* Additional Meta Tags */}
+        <meta name="theme-color" content="#9333ea" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="DonHoster VPS" />
+        
+        {/* Schema.org - WebPage */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "VPS Hosting Miami | Fast & Scalable Virtual Servers",
+            "url": "https://www.donhoster.com/vps",
+            "description": "Virtual Private Server hosting in Miami with dedicated resources, full root access, and instant scalability. Perfect for growing projects and medium-sized websites.",
+            "breadcrumb": {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.donhoster.com/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "VPS Hosting",
+                  "item": "https://www.donhoster.com/vps"
+                }
+              ]
+            }
+          })}
+        </script>
+        
+        {/* Schema.org - Product Listing */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "name": "VPS Hosting Plans Miami",
+            "description": "Virtual Private Server hosting plans in Miami with guaranteed resources and full control",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "item": {
+                  "@type": "Product",
+                  "name": "VPS Small - Miami",
+                  "description": "Entry-level VPS with 1 vCPU Xeon E3-1230, 1GB RAM, 20GB HDD, unlimited bandwidth",
+                  "brand": {
+                    "@type": "Brand",
+                    "name": "DonHoster"
+                  },
+                  "offers": {
+                    "@type": "Offer",
+                    "price": "14.00",
+                    "priceCurrency": "USD",
+                    "availability": "https://schema.org/InStock",
+                    "priceValidUntil": "2025-12-31",
+                    "url": "https://my.donhoster.com/cart.php?a=add&pid=1"
+                  },
+                  "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.8",
+                    "reviewCount": "127"
+                  }
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "item": {
+                  "@type": "Product",
+                  "name": "VPS Medium - Miami",
+                  "description": "Popular VPS with 2 vCPU Xeon E3-1230, 2GB RAM, 50GB HDD, unlimited bandwidth",
+                  "brand": {
+                    "@type": "Brand",
+                    "name": "DonHoster"
+                  },
+                  "offers": {
+                    "@type": "Offer",
+                    "price": "20.00",
+                    "priceCurrency": "USD",
+                    "availability": "https://schema.org/InStock",
+                    "priceValidUntil": "2025-12-31",
+                    "url": "https://my.donhoster.com/cart.php?a=add&pid=3"
+                  },
+                  "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.9",
+                    "reviewCount": "215"
+                  }
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "item": {
+                  "@type": "Product",
+                  "name": "VPS Large - Miami",
+                  "description": "Advanced VPS with 3 vCPU Xeon E3-1230, 3GB RAM, 100GB HDD, unlimited bandwidth",
+                  "brand": {
+                    "@type": "Brand",
+                    "name": "DonHoster"
+                  },
+                  "offers": {
+                    "@type": "Offer",
+                    "price": "27.00",
+                    "priceCurrency": "USD",
+                    "availability": "https://schema.org/InStock",
+                    "priceValidUntil": "2025-12-31",
+                    "url": "https://my.donhoster.com/cart.php?a=add&pid=4"
+                  },
+                  "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.8",
+                    "reviewCount": "183"
+                  }
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 4,
+                "item": {
+                  "@type": "Product",
+                  "name": "VPS Extra Large - Miami",
+                  "description": "Premium VPS with 4 vCPU Xeon E3-1230, 4GB RAM, 250GB HDD, unlimited bandwidth",
+                  "brand": {
+                    "@type": "Brand",
+                    "name": "DonHoster"
+                  },
+                  "offers": {
+                    "@type": "Offer",
+                    "price": "35.00",
+                    "priceCurrency": "USD",
+                    "availability": "https://schema.org/InStock",
+                    "priceValidUntil": "2025-12-31",
+                    "url": "https://my.donhoster.com/cart.php?a=add&pid=5"
+                  },
+                  "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.9",
+                    "reviewCount": "156"
+                  }
+                }
+              }
+            ]
+          })}
+        </script>
+        
+        {/* Schema.org - FAQPage */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "¿Qué diferencia hay entre VPS y hosting compartido?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "El VPS te ofrece recursos dedicados (CPU, RAM, almacenamiento) que no compartes con otros usuarios, mientras que en hosting compartido compartes todos los recursos del servidor. Esto significa mejor rendimiento, mayor control y más estabilidad."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Puedo escalar mi VPS cuando lo necesite?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Sí, puedes escalar tu VPS en cualquier momento. Podemos aumentar CPU, RAM y almacenamiento con mínimo tiempo de inactividad, normalmente en menos de 30 minutos."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Incluye panel de control?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Sí, todos nuestros planes VPS incluyen un panel de control intuitivo desde donde puedes gestionar tu servidor, crear copias de seguridad, monitorear recursos y configurar aplicaciones."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Qué sistemas operativos están disponibles?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Ofrecemos múltiples opciones: Ubuntu, CentOS, Debian, Windows Server, y otras distribuciones populares. También podemos instalar el SO que prefieras."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Incluyen copias de seguridad automáticas?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Sí, realizamos copias de seguridad automáticas diarias que se almacenan por 30 días. También puedes crear snapshots manuales cuando lo necesites."
+                }
+              }
+            ]
+          })}
+        </script>
+        
+        {/* Schema.org - Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "serviceType": "VPS Hosting",
+            "provider": {
+              "@type": "Organization",
+              "name": "DonHoster",
+              "url": "https://www.donhoster.com"
+            },
+            "areaServed": {
+              "@type": "Place",
+              "name": "Miami, Florida"
+            },
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "VPS Hosting Plans",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "VPS Small"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "VPS Medium"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "VPS Large"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "VPS Extra Large"
+                  }
+                }
+              ]
+            }
+          })}
+        </script>
+        
+        {/* Schema.org - Offer Comparison */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "VPS vs Dedicated Server Comparison",
+            "description": "Compare VPS Hosting and Dedicated Server options to find the best solution for your needs",
+            "mainEntity": {
+              "@type": "Table",
+              "about": "Comparison between VPS Hosting and Dedicated Servers"
+            }
+          })}
+        </script>
+      </Helmet>
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -630,6 +954,7 @@ const VPSPage: React.FC<VPSPageProps> = ({ darkMode }) => {
         </div>
       </section>
     </motion.div>
+    </>
   );
 };
 
