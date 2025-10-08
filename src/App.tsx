@@ -11,6 +11,10 @@ import CloudPage from './pages/CloudPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import ZohoSalesIQ from './components/ZohoSalesIQ';
+import DataCenterPage from './pages/DataCenterPage';
+import TermsConditions from './pages/TermsConditions';
+import PrivacyPolicy from './pages/PrivacyPolicyPage';
+
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -44,6 +48,9 @@ function App() {
           <Route path="/cloud" element={<CloudPage darkMode={darkMode} />} />
           <Route path="/about" element={<AboutPage darkMode={darkMode} />} />
           <Route path="/contact" element={<ContactPage darkMode={darkMode} />} />
+          <Route path="/data-center-miami" element={<DataCenterPage darkMode={darkMode} />} />
+          <Route path="/terms-conditions" element={<TermsConditions darkMode={darkMode} />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy darkMode={darkMode} />} />
         </Routes>
         <ZohoSalesIQ />
         <Footer darkMode={darkMode} />

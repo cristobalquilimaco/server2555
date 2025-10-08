@@ -18,7 +18,7 @@ const Home: React.FC<HomeProps> = ({ darkMode }) => {
       <PlansSection darkMode={darkMode} />
       <WhyDonHosterSection darkMode={darkMode} />
       <LocationSection darkMode={darkMode} />
-      <ClientsSection darkMode={darkMode} />
+      {/* <ClientsSection darkMode={darkMode} /> */}
     </main>
   );
 };
