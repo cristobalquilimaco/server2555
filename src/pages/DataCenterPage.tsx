@@ -14,6 +14,7 @@ import {
   Leaf
 } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
+import mapUsa from "/images/datacenter/map-dark.svg"
 
 interface DataCenterPageProps {
   darkMode: boolean;
@@ -462,7 +463,7 @@ const partners = [
 
               <div className={`p-8 rounded-2xl shadow-xl ${darkMode ? 'bg-gray-700' : 'bg-white'}`}>
                 <img
-                  src="/images/datacenter/map-dark.svg"
+                  src={mapUsa}
                   alt="Global Network Map"
                   className="w-full h-auto"
                 />
