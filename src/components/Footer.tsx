@@ -19,9 +19,9 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
   ];
 
   const socialLinks = [
-    { name: 'Facebook', icon: Facebook, url: '#' },
-    { name: 'Instagram', icon: Instagram, url: '#' },
-    { name: 'Twitter', icon: Twitter, url: '#' }
+    { name: 'Facebook', icon: Facebook, url: 'https://www.facebook.com/Datacenter.Donhoster' },
+    { name: 'Instagram', icon: Instagram, url: 'https://www.instagram.com/Don_hoster/' },
+    { name: 'Twitter', icon: Twitter, url: 'https://twitter.com/Donhoster' }
   ];
 
   return (
@@ -205,7 +205,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
           <p className={`text-sm transition-colors duration-300 ${
             darkMode ? 'text-gray-400' : 'text-gray-500'
           }`}>
-            Copyright ©2023 DonHoster All Rights Reserved
+            Copyright ©2025 DonHoster All Rights Reserved
           </p>
           <div className="flex space-x-6">
             <Link
