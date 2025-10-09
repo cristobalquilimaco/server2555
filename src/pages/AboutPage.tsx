@@ -12,12 +12,15 @@ import {
 } from 'lucide-react';
 import AnimatedSection from '../components/AnimateSection';
 import { Helmet } from 'react-helmet-async';
+import { useNavigate } from 'react-router-dom';
 
 interface AboutPageProps {
   darkMode: boolean;
 }
 
 const AboutPage: React.FC<AboutPageProps> = ({ darkMode }) => {
+  const navigate = useNavigate();
+
   const milestones = [
     {
       year: '2017',
@@ -384,13 +387,15 @@ const AboutPage: React.FC<AboutPageProps> = ({ darkMode }) => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 bg-white text-purple-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors duration-200"
+            onClick={()=>navigate('/dedicated-servers')}
             >
-              Discover Our Services
+              Buy dedicated
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-purple-600 font-semibold rounded-lg transition-all duration-200"
+            onClick={()=> navigate('/contact')}
             >
               Contact Us
             </motion.button>

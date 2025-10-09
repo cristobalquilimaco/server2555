@@ -297,11 +297,6 @@ const PageNotFound: React.FC<NotFoundPageProps> = ({ darkMode }) => {
               transition={{ duration: 0.6, delay: 0.8 }}
               className="text-center"
             >
-              <p className={`text-sm transition-colors duration-300 ${
-                darkMode ? 'text-gray-500' : 'text-gray-400'
-              }`}>
-                Error Code: 404 | Page Not Found
-              </p>
             </motion.div>
           </div>
         </section>

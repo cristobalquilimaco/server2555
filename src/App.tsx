@@ -14,6 +14,7 @@ import ZohoSalesIQ from './components/ZohoSalesIQ';
 import DataCenterPage from './pages/DataCenterPage';
 import TermsConditions from './pages/TermsConditions';
 import PrivacyPolicy from './pages/PrivacyPolicyPage';
+import PageNotFound from './pages/PageNotFound';
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
       <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'dark bg-gray-900' : 'bg-white'}`}>
         <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
         <Routes>
+          <Route path="*" element={<PageNotFound darkMode={darkMode} />} />
           <Route path="/" element={<Home darkMode={darkMode} />} />
           <Route path="/dedicated-servers" element={<DedicatedServers darkMode={darkMode} />} />
           <Route path="/web-hosting" element={<WebHosting darkMode={darkMode} />} />
