@@ -90,7 +90,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ darkMode }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className={`min-h-screen pt-20 transition-colors duration-300 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}
+      className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}
     >
       <Helmet>
         <html lang="en" />

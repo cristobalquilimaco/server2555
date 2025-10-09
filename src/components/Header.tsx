@@ -80,7 +80,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
 
             {/* Client Area button */}
             <Link
-              to="/contact"
+              to="https://my.donhoster.com/index.php?rp=/login"
               className="hidden md:block bg-purple-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-purple-700 transition-colors duration-300"
             >
               Client Area
@@ -124,7 +124,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
               </Link>
             ))}
             <Link
-              to="/contact"
+              to="https://my.donhoster.com/index.php?rp=/login"
               onClick={() => setIsMenuOpen(false)}
               className="block mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg font-medium text-center hover:bg-purple-700 transition-colors duration-300"
             >

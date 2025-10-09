@@ -214,6 +214,8 @@ const VPSPage: React.FC<VPSPageProps> = ({ darkMode }) => {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="DonHoster VPS" />
+        <meta name="google-site-verification" content="google94b194ab78fb2b51.html" />
+        <meta name="ahrefs-site-verification" content="b1b407b17742f4b1f2511abaa6ef60a204af93779773732963c4500166c3efaa"></meta>
         
         {/* Schema.org - WebPage */}
         <script type="application/ld+json">

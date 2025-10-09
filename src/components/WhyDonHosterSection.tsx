@@ -5,11 +5,16 @@ import client2 from '../images/client_2.png'
 import client3 from '../images/client_3.png'
 import client4 from '../images/client_4.png'
 import client5 from '../images/client_5.png'
+import { useNavigate } from 'react-router-dom';
 interface WhyDonHosterSectionProps {
   darkMode: boolean;
 }
 
 const WhyDonHosterSection: React.FC<WhyDonHosterSectionProps> = ({ darkMode }) => {
+
+  const navigate = useNavigate();
+
+
   const features = [
     {
       icon: Globe,
@@ -219,7 +224,7 @@ const WhyDonHosterSection: React.FC<WhyDonHosterSectionProps> = ({ darkMode }) =
 </div>
 
           <div className="text-center mt-20">
-            <button className="bg-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+            <button onClick={() => navigate("/contact")} className="bg-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-lg">
               About Us
             </button>
           </div>
@@ -319,7 +324,7 @@ const WhyDonHosterSection: React.FC<WhyDonHosterSectionProps> = ({ darkMode }) =
         </div>
       </div>
 
-      <style jsx global>{`
+      <style>{`
         @keyframes scroll-infinite {
           0% {
             transform: translateX(0);

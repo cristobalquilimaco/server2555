@@ -21,13 +21,8 @@ const ContactPage: React.FC<ContactPageProps> = () => {
 
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="min-h-screen pt-20"
-    >
-    <Helmet>
+    <>
+        <Helmet>
       {/* Basic Configuration */}
       <html lang="en" />
       <meta charSet="UTF-8" />
@@ -218,11 +213,18 @@ const ContactPage: React.FC<ContactPageProps> = () => {
       <meta name="apple-mobile-web-app-title" content="DonHoster Contact" />
       <meta name="format-detection" content="telephone=no" />
       <meta name="theme-color" content="#9333ea" />
+      <meta name="google-site-verification" content="google94b194ab78fb2b51.html" />
+      <meta name="ahrefs-site-verification" content="b1b407b17742f4b1f2511abaa6ef60a204af93779773732963c4500166c3efaa"></meta>
 
       {/* Security */}
       <meta name="referrer" content="no-referrer-when-downgrade" />
     </Helmet>
-
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="min-h-screen"
+    >
       {/* Hero Section */}
       <section className="relative py-16 lg:py-24 bg-gradient-to-br from-purple-600 via-purple-700 to-purple-800 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
@@ -299,6 +301,7 @@ const ContactPage: React.FC<ContactPageProps> = () => {
       {/* Call to Action */}
       <CallToAction onContactClick={scrollToContact} />
     </motion.div>
+    </>
   );
 };
 

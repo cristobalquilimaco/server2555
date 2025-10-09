@@ -274,6 +274,8 @@ const CloudPage: React.FC<CloudPageProps> = ({ darkMode}) => {
       <meta name="twitter:description" content="Cloud VPS Miami from $23/month with Intel CPUs, NVMe SSD, VMware hypervisor & 24/7 support. Scalable virtual servers with 99.9% uptime guaranteed." />
       <meta name="twitter:image" content="https://www.donhoster.com/images/og-cloud-vps.jpg" />
       <meta name="twitter:image:alt" content="DonHoster Cloud VPS" />
+      <meta name="google-site-verification" content="google94b194ab78fb2b51.html" />
+      <meta name="ahrefs-site-verification" content="b1b407b17742f4b1f2511abaa6ef60a204af93779773732963c4500166c3efaa"></meta>
 
       {/* Schema.org - Product (VPS Plans) */}
       <script type="application/ld+json">
@@ -499,7 +501,7 @@ const CloudPage: React.FC<CloudPageProps> = ({ darkMode}) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className={`min-h-screen pt-20 transition-colors duration-300 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}
+      className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}
     >
       {/* Invisible H1 for SEO */}
       <div className="sr-only">

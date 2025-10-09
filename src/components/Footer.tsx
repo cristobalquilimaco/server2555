@@ -15,7 +15,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
     { name: 'VPS KVM', path: '/vps' },
     { name: 'Cloud server', path: '/cloud' },
     { name: 'Contact', path: '/contact' },
-    { name: 'Data Center', path: '/about' }
+    { name: 'Data Center', path: '/data-center-miami' }
   ];
 
   const socialLinks = [
@@ -209,7 +209,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
           </p>
           <div className="flex space-x-6">
             <Link
-              to="/privacy"
+              to="/privacy-policy"
               className={`text-sm transition-colors duration-300 hover:text-purple-600 ${
                 darkMode 
                   ? 'text-gray-400 hover:text-purple-400' 
@@ -219,7 +219,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
               Privacy Policy
             </Link>
             <Link
-              to="/terms"
+              to="/terms-conditions"
               className={`text-sm transition-colors duration-300 hover:text-purple-600 ${
                 darkMode 
                   ? 'text-gray-400 hover:text-purple-400' 

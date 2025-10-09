@@ -568,10 +568,6 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
 
   return (
     <>
-import { Helmet } from 'react-helmet-async';
-
-// Agregar esto al inicio del componente DedicatedServers, después de los useState
-
 <Helmet>
   {/* Meta Tags Básicos */}
   <title>Dedicated Servers Miami | DonHoster</title>
@@ -996,7 +992,7 @@ import { Helmet } from 'react-helmet-async';
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className={`min-h-screen pt-20 transition-colors duration-300 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}
+        className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}
       >
         {/* Hero Section */}
         <section className="relative py-16 lg:py-24 overflow-hidden">

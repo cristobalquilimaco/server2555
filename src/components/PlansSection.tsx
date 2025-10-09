@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Check, Server, Cloud, Cpu, HardDrive } from 'lucide-react';
 
 interface PlansSectionProps {
@@ -6,8 +7,11 @@ interface PlansSectionProps {
 }
 
 const PlansSection: React.FC<PlansSectionProps> = ({ darkMode }) => {
+  const navigate = useNavigate();
+
   const plans = [
     {
+      id: 'vps-small',
       name: 'VPS in Miami, FL - Small',
       price: '$14',
       period: 'USD/mo',
@@ -20,9 +24,11 @@ const PlansSection: React.FC<PlansSectionProps> = ({ darkMode }) => {
         'Unlimited Bandwidth',
         '24/7 Support'
       ],
+      url: 'https://my.donhoster.com/cart.php?a=add&pid=1',
       popular: false
     },
     {
+      id: 'dedicated-medium',
       name: 'Dedicated Servers in Miami, FL - Medium',
       price: '$82',
       period: 'USD/mo',
@@ -35,11 +41,13 @@ const PlansSection: React.FC<PlansSectionProps> = ({ darkMode }) => {
         'Root access / Remote Desktop',
         '24/7 support'
       ],
+      url: 'https://my.donhoster.com/cart.php?a=add&pid=2',
       popular: true
     },
     {
-      name: 'Cloud VM',
-      price: '$18.05',
+      id: 'cloud-vps-essential',
+      name: 'Cloud VPS Essential',
+      price: '$23',
       period: 'USD/mo',
       icon: Cloud,
       features: [
@@ -51,31 +59,38 @@ const PlansSection: React.FC<PlansSectionProps> = ({ darkMode }) => {
         'Cloud Hosted Infrastructure',
         'Redundant Power & Connectivity'
       ],
+      url: 'https://my.donhoster.com/cart.php?a=add&pid=7',
       popular: false
     },
-    {
-      name: 'US/East Coast - Supermicro MicroCloud',
-      price: '$120.00',
-      period: 'USD/mo',
-      icon: HardDrive,
-      features: [
-        'Bare Metal Dedicated Server in USA',
-        'Intel Xeon E3 processor families E3-1230 v3, E3-1240 v3, E3-1270 v3',
-        'Up to 32GB DDR3 1600MHz memory support',
-        '2 x 3.5" SATA/SSD drive options',
-        'Fully Hotswappable node chassis',
-        'Redundant Power Supplies'
-      ],
-      popular: false
-    }
+{
+  id: 'reseller-hosting',
+  name: 'Hosting Reseller - Próximamente...',
+  price: '$5',
+  period: 'USD/mo',
+  icon: HardDrive,
+  features: [
+    'Reseller Hosting Mx',
+    '20 cPanel Accounts',
+    'Includes SSL Certificate Free',
+    'White Label - Custom DNS',
+    '5GB SSD Disc Space',
+    'Technical Support 24/7'
+  ],
+  url: '/contact',
+  popular: false,
+  comingSoon: true
+}
+
   ];
 
   return (
-    <section className={`py-20 transition-colors duration-300 ${
-      darkMode 
-        ? 'bg-gradient-to-br from-purple-900 via-gray-900 to-purple-800' 
-        : 'bg-gradient-to-br from-purple-700 via-purple-600 to-purple-800'
-    }`}>
+    <section
+      className={`py-20 transition-colors duration-300 ${
+        darkMode
+          ? 'bg-gradient-to-br from-purple-900 via-gray-900 to-purple-800'
+          : 'bg-gradient-to-br from-purple-700 via-purple-600 to-purple-800'
+      }`}
+    >
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-white mb-4">
@@ -87,17 +102,17 @@ const PlansSection: React.FC<PlansSectionProps> = ({ darkMode }) => {
         </div>
 
         <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8">
-          {plans.map((plan, index) => {
+          {plans.map((plan) => {
             const IconComponent = plan.icon;
             return (
               <div
-                key={index}
+                key={plan.id}
                 className={`relative p-8 rounded-2xl transition-all duration-300 hover:scale-105 ${
                   plan.popular
                     ? 'bg-gradient-to-br from-purple-600 to-purple-700 border-2 border-purple-400 shadow-2xl shadow-purple-500/25'
                     : darkMode
-                      ? 'bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700'
-                      : 'bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700'
+                    ? 'bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700'
+                    : 'bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700'
                 } hover:shadow-2xl`}
               >
                 {plan.popular && (
@@ -120,8 +135,8 @@ const PlansSection: React.FC<PlansSectionProps> = ({ darkMode }) => {
                 </div>
 
                 <ul className="space-y-4 mb-8">
-                  {plan.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-start space-x-3">
+                  {plan.features.map((feature, index) => (
+                    <li key={index} className="flex items-start space-x-3">
                       <Check className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
                       <span className="text-gray-300 text-sm leading-relaxed">
                         {feature}
@@ -130,13 +145,19 @@ const PlansSection: React.FC<PlansSectionProps> = ({ darkMode }) => {
                   ))}
                 </ul>
 
-                <button className={`w-full py-4 px-6 rounded-lg font-semibold transition-all duration-300 hover:scale-105 ${
-                  plan.popular
-                    ? 'bg-white text-purple-600 hover:bg-gray-100'
-                    : 'bg-purple-600 text-white hover:bg-purple-700'
-                }`}>
-                  Choose Plan
-                </button>
+<button
+  id={`choose-plan-${plan.id}`}
+  onClick={() => navigate(plan.url)}
+  className={`w-full py-4 px-6 rounded-lg font-semibold transition-all duration-300 hover:scale-105 ${
+    plan.comingSoon
+      ? 'bg-gray-500 text-white cursor-pointer hover:bg-gray-600'
+      : plan.popular
+      ? 'bg-white text-purple-600 hover:bg-gray-100'
+      : 'bg-purple-600 text-white hover:bg-purple-700'
+  }`}
+>
+  {plan.comingSoon ? 'Próximamente' : 'Choose Plan'}
+</button>
               </div>
             );
           })}

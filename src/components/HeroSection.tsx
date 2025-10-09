@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Server, Globe, HardDrive, Cloud, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface HeroCarouselProps {
@@ -16,6 +17,7 @@ interface Service {
   accentColor: string;
   icon: React.ElementType;
   buttonText: string;
+  path: string; // 🔹 Agregamos esta propiedad para indicar la ruta de destino
 }
 
 const services: Service[] = [
@@ -29,7 +31,8 @@ const services: Service[] = [
     secondaryColor: 'from-purple-900 via-gray-900 to-purple-800',
     accentColor: 'purple',
     icon: Server,
-    buttonText: 'Dedicated Server'
+    buttonText: 'Buy Dedicated Server',
+    path: '/dedicated-servers' // 🔹 Ruta correspondiente
   },
   {
     id: 'vps',
@@ -41,7 +44,8 @@ const services: Service[] = [
     secondaryColor: 'from-blue-900 via-gray-900 to-cyan-800',
     accentColor: 'purple',
     icon: HardDrive,
-    buttonText: 'Explore VPS Plans'
+    buttonText: 'Buy VPS Plans',
+    path: '/vps-hosting'
   },
   {
     id: 'hosting',
@@ -53,7 +57,8 @@ const services: Service[] = [
     secondaryColor: 'from-emerald-900 via-gray-900 to-teal-800',
     accentColor: 'purple',
     icon: Globe,
-    buttonText: 'View Hosting Plans'
+    buttonText: 'Buy Hosting Plans',
+    path: '/web-hosting'
   },
   {
     id: 'cloud',
@@ -65,7 +70,8 @@ const services: Service[] = [
     secondaryColor: 'from-orange-900 via-gray-900 to-red-800',
     accentColor: 'purple',
     icon: Cloud,
-    buttonText: 'Cloud Services'
+    buttonText: 'Buy Cloud Services',
+    path: '/cloud-hosting'
   }
 ];
 
@@ -73,6 +79,7 @@ const HeroCarousel: React.FC<HeroCarouselProps> = ({ darkMode }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const navigate = useNavigate(); // 🔹 Hook de navegación
 
   const currentService = services[currentIndex];
 
@@ -111,6 +118,10 @@ const HeroCarousel: React.FC<HeroCarouselProps> = ({ darkMode }) => {
       setCurrentIndex(index);
       setIsTransitioning(false);
     }, 400);
+  };
+
+  const handleNavigate = (path: string) => {
+    navigate(path);
   };
 
   const IconComponent = currentService.icon;
@@ -155,99 +166,103 @@ const HeroCarousel: React.FC<HeroCarouselProps> = ({ darkMode }) => {
         </button>
       </div>
 
-{/* Main Content */}
-<div className="container mx-auto px-4 pt-24 pb-16 md:py-16 relative z-10 min-h-[70vh] flex items-center">
-  <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full">
-    {/* Left Content */}
-    <div className="text-center lg:text-left">
-      <div className={`transition-all duration-500 ${isTransitioning ? 'opacity-0 transform translate-y-8' : 'opacity-100 transform translate-y-0'}`}>
-        <div className="flex items-center justify-center lg:justify-start mb-4 md:mb-6">
-          <div className={`p-3 md:p-4 rounded-2xl bg-gradient-to-r from-${currentService.accentColor}-400/20 to-${currentService.accentColor}-600/20 backdrop-blur-sm border border-white/10`}>
-            <IconComponent className={`w-10 h-10 md:w-12 md:h-12 text-${currentService.accentColor}-300`} />
-          </div>
-        </div>
+      {/* Main Content */}
+      <div className="container mx-auto px-4 pt-24 pb-16 md:py-16 relative z-10 min-h-[70vh] flex items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full">
+          {/* Left Content */}
+          <div className="text-center lg:text-left">
+            <div className={`transition-all duration-500 ${isTransitioning ? 'opacity-0 transform translate-y-8' : 'opacity-100 transform translate-y-0'}`}>
+              <div className="flex items-center justify-center lg:justify-start mb-4 md:mb-6">
+                <div className={`p-3 md:p-4 rounded-2xl bg-gradient-to-r from-${currentService.accentColor}-400/20 to-${currentService.accentColor}-600/20 backdrop-blur-sm border border-white/10`}>
+                  <IconComponent className={`w-10 h-10 md:w-12 md:h-12 text-${currentService.accentColor}-300`} />
+                </div>
+              </div>
 
-        <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
-          <span className="block transition-all duration-700 delay-100">
-            {currentService.title}
-          </span>
-          <span className={`text-transparent bg-clip-text bg-gradient-to-r from-${currentService.accentColor}-300 to-pink-300 block transition-all duration-700 delay-200`}>
-            {currentService.subtitle}
-          </span>
-        </h1>
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
+                <span className="block transition-all duration-700 delay-100">
+                  {currentService.title}
+                </span>
+                <span className={`text-transparent bg-clip-text bg-gradient-to-r from-${currentService.accentColor}-300 to-pink-300 block transition-all duration-700 delay-200`}>
+                  {currentService.subtitle}
+                </span>
+              </h1>
 
-        <p className="text-base md:text-lg lg:text-xl text-white/90 mb-6 md:mb-8 leading-relaxed transition-all duration-700 delay-300 max-w-2xl mx-auto lg:mx-0">
-          {currentService.description}
-        </p>
+              <p className="text-base md:text-lg lg:text-xl text-white/90 mb-6 md:mb-8 leading-relaxed transition-all duration-700 delay-300 max-w-2xl mx-auto lg:mx-0">
+                {currentService.description}
+              </p>
 
-        <div className="flex flex-row gap-3 sm:gap-4 justify-center lg:justify-start transition-all duration-700 delay-500">
-          <button className={`flex-1 sm:flex-none bg-${currentService.accentColor}-600 text-white px-4 py-3 sm:px-8 sm:py-4 rounded-lg font-semibold hover:bg-${currentService.accentColor}-700 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-${currentService.accentColor}-500/25 transform text-sm sm:text-base`}>
-            {currentService.buttonText}
-          </button>
-          <button className={`flex-1 sm:flex-none border border-${currentService.accentColor}-300 text-${currentService.accentColor}-100 px-4 py-3 sm:px-8 sm:py-4 rounded-lg font-semibold hover:bg-${currentService.accentColor}-700/50 transition-all duration-300 backdrop-blur-sm text-sm sm:text-base`}>
-            Learn More
-          </button>
-        </div>
-      </div>
-    </div>
-
-    {/* Right Content - Animated Service Illustration */}
-    <div className="relative hidden lg:block">
-      <div className={`relative w-full h-96 flex items-center justify-center transition-all duration-500 ${isTransitioning ? 'opacity-0 transform scale-95' : 'opacity-100 transform scale-100'}`}>
-        {/* Central Icon with Glow */}
-        <div className="absolute z-10">
-          <div className="relative">
-            <IconComponent className={`w-24 h-24 md:w-32 md:h-32 text-${currentService.accentColor}-300 animate-pulse-slow`} />
-            <div className={`absolute inset-0 animate-ping opacity-20`}>
-              <IconComponent className={`w-24 h-24 md:w-32 md:h-32 text-${currentService.accentColor}-200`} />
-            </div>
-            <div className={`absolute inset-0 blur-xl bg-${currentService.accentColor}-400/30 rounded-full animate-pulse`}></div>
-          </div>
-        </div>
-
-        {/* Orbiting Elements */}
-        <div className="absolute inset-0">
-          {[0, 1, 2, 3, 4, 5].map((index) => (
-            <div
-              key={index}
-              className="absolute animate-spin-slow"
-              style={{
-                top: '50%',
-                left: '50%',
-                transform: `translate(-50%, -50%) rotate(${index * 60}deg) translateY(-120px)`,
-                animationDuration: `${20 + index * 5}s`,
-                animationDirection: index % 2 === 0 ? 'normal' : 'reverse'
-              }}
-            >
-              <div className="animate-counter-rotate">
-                <div className={`w-3 h-3 rounded-full bg-gradient-to-r from-${currentService.accentColor}-400 to-white animate-pulse`}
-                     style={{ animationDelay: `${index * 0.3}s` }}></div>
+              <div className="flex flex-row gap-3 sm:gap-4 justify-center lg:justify-start transition-all duration-700 delay-500">
+                <button
+                  onClick={() => handleNavigate(currentService.path)} // 🔹 Navega a la ruta
+                  className={`flex-1 sm:flex-none bg-${currentService.accentColor}-600 text-white px-4 py-3 sm:px-8 sm:py-4 rounded-lg font-semibold hover:bg-${currentService.accentColor}-700 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-${currentService.accentColor}-500/25 transform text-sm sm:text-base`}
+                >
+                  {currentService.buttonText}
+                </button>
+                <button
+                  onClick={() => handleNavigate(currentService.path)} // 🔹 También navega (puedes cambiar a otra ruta si lo deseas)
+                  className={`flex-1 sm:flex-none border border-${currentService.accentColor}-300 text-${currentService.accentColor}-100 px-4 py-3 sm:px-8 sm:py-4 rounded-lg font-semibold hover:bg-${currentService.accentColor}-700/50 transition-all duration-300 backdrop-blur-sm text-sm sm:text-base`}
+                >
+                  Learn More
+                </button>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
 
-        {/* Connection Rays */}
-        <div className="absolute inset-0">
-          {[0, 1, 2, 3, 4, 5].map((index) => (
-            <div
-              key={`ray-${index}`}
-              className={`absolute w-0.5 h-24 bg-gradient-to-t from-${currentService.accentColor}-400/50 to-transparent animate-pulse`}
-              style={{
-                top: '50%',
-                left: '50%',
-                transform: `translate(-50%, -50%) rotate(${index * 60}deg)`,
-                transformOrigin: 'center bottom',
-                animationDelay: `${index * 0.2}s`
-              }}
-            />
-          ))}
+          {/* Right Content */}
+          <div className="relative hidden lg:block">
+            <div className={`relative w-full h-96 flex items-center justify-center transition-all duration-500 ${isTransitioning ? 'opacity-0 transform scale-95' : 'opacity-100 transform scale-100'}`}>
+              <div className="absolute z-10">
+                <div className="relative">
+                  <IconComponent className={`w-24 h-24 md:w-32 md:h-32 text-${currentService.accentColor}-300 animate-pulse-slow`} />
+                  <div className={`absolute inset-0 animate-ping opacity-20`}>
+                    <IconComponent className={`w-24 h-24 md:w-32 md:h-32 text-${currentService.accentColor}-200`} />
+                  </div>
+                  <div className={`absolute inset-0 blur-xl bg-${currentService.accentColor}-400/30 rounded-full animate-pulse`}></div>
+                </div>
+              </div>
+
+              <div className="absolute inset-0">
+                {[0, 1, 2, 3, 4, 5].map((index) => (
+                  <div
+                    key={index}
+                    className="absolute animate-spin-slow"
+                    style={{
+                      top: '50%',
+                      left: '50%',
+                      transform: `translate(-50%, -50%) rotate(${index * 60}deg) translateY(-120px)`,
+                      animationDuration: `${20 + index * 5}s`,
+                      animationDirection: index % 2 === 0 ? 'normal' : 'reverse'
+                    }}
+                  >
+                    <div className="animate-counter-rotate">
+                      <div
+                        className={`w-3 h-3 rounded-full bg-gradient-to-r from-${currentService.accentColor}-400 to-white animate-pulse`}
+                        style={{ animationDelay: `${index * 0.3}s` }}
+                      ></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="absolute inset-0">
+                {[0, 1, 2, 3, 4, 5].map((index) => (
+                  <div
+                    key={`ray-${index}`}
+                    className={`absolute w-0.5 h-24 bg-gradient-to-t from-${currentService.accentColor}-400/50 to-transparent animate-pulse`}
+                    style={{
+                      top: '50%',
+                      left: '50%',
+                      transform: `translate(-50%, -50%) rotate(${index * 60}deg)`,
+                      transformOrigin: 'center bottom',
+                      animationDelay: `${index * 0.2}s`
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
-
 
       {/* Service Indicators */}
       <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20">

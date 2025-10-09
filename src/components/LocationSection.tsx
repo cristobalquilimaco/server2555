@@ -1,12 +1,16 @@
 import React from 'react';
 import { Plus } from 'lucide-react';
 import mapaUsa from ".././images/USA-Map-PNG.webp"
+import { useNavigate } from 'react-router-dom';
 
 interface LocationSectionProps {
   darkMode: boolean;
 }
 
 const LocationSection: React.FC<LocationSectionProps> = ({ darkMode }) => {
+
+  const navigate = useNavigate();
+
   return (
     <section className={`py-20 transition-colors duration-300 ${
       darkMode 
@@ -64,7 +68,7 @@ const LocationSection: React.FC<LocationSectionProps> = ({ darkMode }) => {
           </div>
 
           <div className="text-center mt-16">
-            <button className="bg-purple-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-xl border border-purple-500">
+            <button onClick={()=>navigate("/data-center-miami")} className="bg-purple-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-xl border border-purple-500">
               Our Data Center
             </button>
           </div>

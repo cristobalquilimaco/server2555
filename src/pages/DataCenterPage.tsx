@@ -326,6 +326,8 @@ const DataCenterPage: React.FC<DataCenterPageProps> = ({ darkMode }) => {
       <meta name="apple-mobile-web-app-title" content="DonHoster DC" />
       <meta name="format-detection" content="telephone=no" />
       <meta name="theme-color" content="#9333ea" />
+      <meta name="google-site-verification" content="google94b194ab78fb2b51.html" />
+      <meta name="ahrefs-site-verification" content="b1b407b17742f4b1f2511abaa6ef60a204af93779773732963c4500166c3efaa"></meta>
 
       {/* Security */}
       <meta name="referrer" content="no-referrer-when-downgrade" />
