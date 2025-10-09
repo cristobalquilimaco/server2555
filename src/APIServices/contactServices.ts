@@ -4,7 +4,7 @@ export interface ContactFormData {
   email: string;
   subject: string;
   message: string;
-  captcha?: string; // solo para validación local, no se envía
+  captcha?: string;
 }
 
 export interface ApiResponse {
@@ -15,95 +15,141 @@ export interface ApiResponse {
 }
 
 interface RawApiResult {
-      success?: boolean;
+  success?: boolean;
   result?: string;
   message?: string;
   ticketId?: string | number;
+  ticket_id?: string | number;
   id?: string | number;
 }
 
 export class ContactService {
   private static readonly API_ENDPOINT = 'https://donhoster.com/api/contactapi.php';
-
+  
   static async submitContactForm(formData: ContactFormData): Promise<ApiResponse> {
     try {
-      // Validación básica antes de enviar
+      // Basic validation before sending
       const validation = this.validateFormData(formData);
       if (!validation.isValid) {
-        return { success: false, message: validation.message || 'Datos del formulario inválidos' };
+        return { success: false, message: validation.message || 'Invalid form data' };
       }
 
-      // 👉 Armamos los datos para x-www-form-urlencoded (sin captcha)
-const requestData = JSON.stringify({
-  name: formData.name.trim(),
-  email: formData.email.trim().toLowerCase(),
-  subject: formData.subject.trim(),
-  message: formData.message.trim(),
-  source: 'web_contact_form',
-  recaptchaToken: formData.captcha || '' // token invisible
-});
+      // 🔧 NOW SEND JSON (as your PHP expects)
+      const requestData = {
+        name: formData.name.trim(),
+        email: formData.email.trim().toLowerCase(),
+        subject: formData.subject.trim(),
+        message: formData.message.trim(),
+        source: 'web_contact_form'
+      };
+
+      // Timeout controller
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 20000); // 20 seconds
 
       const response = await fetch(this.API_ENDPOINT, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
-        body: requestData,
+        body: JSON.stringify(requestData),
+        signal: controller.signal,
+        credentials: 'omit', // Do not send cross-origin cookies
       });
 
+      clearTimeout(timeoutId);
+
+      // Read response as text first for debugging
+      const responseText = await response.text();
+      
       if (!response.ok) {
+        console.error('HTTP Error:', response.status, responseText);
         throw new Error(`HTTP Error: ${response.status} - ${response.statusText}`);
       }
 
-      const result = await response.json();
-      return this.processApiResponse(result);
+      // Try parsing JSON
+      let result: RawApiResult;
+      try {
+        result = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error('Response is not valid JSON:', responseText);
+        throw new Error('The server response is not valid JSON');
+      }
 
+      return this.processApiResponse(result);
+      
     } catch (error) {
-      console.error('Error al enviar formulario de contacto:', error);
+      console.error('Error while submitting contact form:', error);
+      
+      if (error instanceof Error) {
+        if (error.name === 'AbortError') {
+          return {
+            success: false,
+            message: 'The request took too long. Please try again.',
+            error: 'Timeout'
+          };
+        }
+        
+        // Network/CORS error
+        if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+          return {
+            success: false,
+            message: 'Connection error. Make sure you are on https://donhoster.com or https://donhoster.es',
+            error: 'Network Error - Possible CORS issue'
+          };
+        }
+      }
+      
       return {
         success: false,
         message: this.getErrorMessage(error),
-        error: error instanceof Error ? error.message : 'Error desconocido'
+        error: error instanceof Error ? error.message : 'Unknown error'
       };
     }
   }
-
+  
   private static validateFormData(data: ContactFormData) {
-    if (!data.name?.trim()) return { isValid: false, message: 'El nombre es obligatorio' };
-    if (!data.email?.trim()) return { isValid: false, message: 'El email es obligatorio' };
-    if (!data.subject?.trim()) return { isValid: false, message: 'El asunto es obligatorio' };
-    if (!data.message?.trim()) return { isValid: false, message: 'El mensaje es obligatorio' };
-
+    if (!data.name?.trim()) return { isValid: false, message: 'Name is required' };
+    if (!data.email?.trim()) return { isValid: false, message: 'Email is required' };
+    if (!data.subject?.trim()) return { isValid: false, message: 'Subject is required' };
+    if (!data.message?.trim()) return { isValid: false, message: 'Message is required' };
+    
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(data.email.trim())) {
-      return { isValid: false, message: 'El formato del email no es válido' };
+      return { isValid: false, message: 'Invalid email format' };
     }
-
+    
     return { isValid: true };
   }
 
-private static processApiResponse(result: RawApiResult): ApiResponse {
-  if (result.success === true || result.result === 'success') {
+  private static processApiResponse(result: RawApiResult): ApiResponse {
+    // Handle successful response
+    if (result.success === true || result.result === 'success') {
+      return {
+        success: true,
+        message: result.message || 'Message sent successfully! We will contact you soon.',
+        ticketId: result.ticket_id || result.ticketId || result.id
+      };
+    }
+    
+    // Handle server-side error
     return {
-      success: true,
-      message: result.message || '¡Mensaje enviado correctamente! Te contactaremos pronto.',
-      ticketId: result.ticketId || result.id
+      success: false,
+      message: result.message || 'An error occurred while sending the message.',
+      error: result.message
     };
   }
-
-  return {
-    success: false,
-    message: result.message || 'Ocurrió un error al enviar el mensaje.',
-    ticketId: undefined
-  };
-}
-
+  
   private static getErrorMessage(error: unknown): string {
     if (error instanceof Error) {
-      if (error.message.includes('fetch')) return 'Error de conexión. Por favor, inténtalo de nuevo.';
-      if (error.message.includes('HTTP Error')) return 'Error del servidor. Nuestro equipo ha sido notificado.';
-      return 'Ocurrió un error inesperado. Por favor, inténtalo más tarde.';
+      if (error.name === 'AbortError') return 'The connection took too long. Please try again.';
+      if (error.message.includes('Failed to fetch')) return 'Network error. Please check your internet connection.';
+      if (error.message.includes('NetworkError')) return 'Network error. Please try again.';
+      if (error.message.includes('HTTP Error: 5')) return 'Server error. Our team has been notified.';
+      if (error.message.includes('HTTP Error: 4')) return 'Invalid request. Please review your input.';
+      return error.message;
     }
-    return 'Error desconocido. Por favor, contacta con soporte.';
+    return 'Unknown error. Please contact support.';
   }
 }

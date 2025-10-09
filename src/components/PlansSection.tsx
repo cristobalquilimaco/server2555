@@ -64,7 +64,7 @@ const PlansSection: React.FC<PlansSectionProps> = ({ darkMode }) => {
     },
 {
   id: 'reseller-hosting',
-  name: 'Hosting Reseller - Próximamente...',
+  name: 'Hosting Reseller - coming soon...',
   price: '$5',
   period: 'USD/mo',
   icon: HardDrive,
@@ -156,7 +156,7 @@ const PlansSection: React.FC<PlansSectionProps> = ({ darkMode }) => {
       : 'bg-purple-600 text-white hover:bg-purple-700'
   }`}
 >
-  {plan.comingSoon ? 'Próximamente' : 'Choose Plan'}
+  {plan.comingSoon ? 'Coming Soon' : 'Choose Plan'}
 </button>
               </div>
             );

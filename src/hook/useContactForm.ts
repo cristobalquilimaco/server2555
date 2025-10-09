@@ -48,12 +48,12 @@ export const useContactForm = (): UseContactFormReturn => {
         !formData.subject.trim() ||
         !formData.message.trim()
       ) {
-        throw new Error('Por favor, completa todos los campos obligatorios');
+        throw new Error('Please complete all the required fields.');
       }
 
       // ✅ Validación de captcha
       if (!formData.captcha?.trim()) {
-        throw new Error('Por favor, confirma el captcha');
+        throw new Error('Please confirm the captcha.');
       }
 
       // Llamar al servicio de API
@@ -89,14 +89,14 @@ export const useContactForm = (): UseContactFormReturn => {
 
     } catch (error) {
       // Error de validación o conexión
-      console.error('Error en useContactForm:', error);
+      console.error('Error:', error);
 
       setFormState({
         isLoading: false,
         isSubmitted: true,
         isSuccess: false,
         message: '',
-        error: error instanceof Error ? error.message : 'Error desconocido',
+        error: error instanceof Error ? error.message : 'Unknown error.',
         ticketId: undefined
       });
     }
