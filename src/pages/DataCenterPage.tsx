@@ -23,14 +23,15 @@ const DataCenterPage: React.FC<DataCenterPageProps> = ({ darkMode }) => {
   const [currentPartnerIndex, setCurrentPartnerIndex] = useState(0);
   const [currentDataCenterIndex, setCurrentDataCenterIndex] = useState(0);
 
-  const partners = [
-    { src: '/images/datacenter/aws.png', alt: 'AWS' },
-    { src: '/images/datacenter/Google_Cloud_logo.png', alt: 'Google Cloud' },
-    { src: '/images/datacenter/IBM_logo.svg.png', alt: 'IBM' },
-    { src: '/images/datacenter/NVIDIA_logo.svg.png', alt: 'NVIDIA' },
-    { src: '/images/datacenter/aws.png', alt: 'AWS' },
-    { src: '/images/datacenter/Google_Cloud_logo.png', alt: 'Google Cloud' }
-  ];
+const partners = [
+  { src: '/images/datacenter/aws.png', alt: 'AWS' },
+  { src: '/images/datacenter/Google_Cloud_logo.png', alt: 'Google Cloud' },
+  { src: '/images/datacenter/IBM_logo.svg.png', alt: 'IBM' },
+  { src: '/images/datacenter/NVIDIA_logo.svg.png', alt: 'NVIDIA' },
+  { src: '/images/datacenter/aws.png', alt: 'AWS' },
+  { src: '/images/datacenter/Google_Cloud_logo.png', alt: 'Google Cloud' }
+];
+
 
   const dataCenterImages = [
     'https://images.pexels.com/photos/442150/pexels-photo-442150.jpeg',
