@@ -982,7 +982,7 @@ const CloudPage: React.FC<CloudPageProps> = ({ darkMode}) => {
             </motion.button>
 
             <motion.a
-              href="/contacto"
+              href="/contact"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-purple-600 font-semibold rounded-lg transition-all duration-200 inline-block"
