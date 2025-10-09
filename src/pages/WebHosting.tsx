@@ -11,6 +11,7 @@ import {
   ChevronDown
 } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
+import { useNavigate } from 'react-router-dom';
 
 interface WebHostingProps {
   darkMode: boolean;
@@ -18,6 +19,7 @@ interface WebHostingProps {
 
 const WebHosting: React.FC<WebHostingProps> = ({ darkMode }) => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const navigate = useNavigate();
 
   const hostingPlans = [
     {
@@ -1055,11 +1057,12 @@ const WebHosting: React.FC<WebHostingProps> = ({ darkMode }) => {
             </motion.button>
 
             <motion.button
+              onClick={()=> navigate("/contact")}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-purple-600 font-semibold rounded-lg transition-all duration-200"
             >
-              Free Migration
+              Contact us
             </motion.button>
           </div>
         </div>

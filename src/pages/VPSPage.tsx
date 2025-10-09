@@ -12,6 +12,7 @@ import {
   ChevronDown
 } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
+import { useNavigate } from 'react-router-dom';
 
 interface VPSPageProps {
   darkMode: boolean;
@@ -20,6 +21,7 @@ interface VPSPageProps {
 const VPSPage: React.FC<VPSPageProps> = ({ darkMode }) => {
   const [activeTab, setActiveTab] = useState<keyof typeof comparisonData>('vps');
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const navigate = useNavigate();
 
   const vpsPlans = [
     {
@@ -530,6 +532,9 @@ const VPSPage: React.FC<VPSPageProps> = ({ darkMode }) => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors duration-200 flex items-center space-x-2"
+              onClick={() => {
+              document.getElementById("vps-plans")?.scrollIntoView({ behavior: "smooth" });
+              }}
             >
               <span>View VPS Plans</span>
               <ArrowRight className="w-5 h-5" />
@@ -539,7 +544,7 @@ const VPSPage: React.FC<VPSPageProps> = ({ darkMode }) => {
       </section>
 
       {/* VPS Plans */}
-      <section className={`py-16 lg:py-24 transition-colors duration-300 ${
+      <section id='vps-plans' className={`py-16 lg:py-24 transition-colors duration-300 ${
         darkMode ? 'bg-gray-900' : 'bg-white'
       }`}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -950,12 +955,16 @@ const VPSPage: React.FC<VPSPageProps> = ({ darkMode }) => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 bg-white text-purple-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors duration-200 flex items-center justify-center space-x-2"
+              onClick={() => {
+              document.getElementById("vps-plans")?.scrollIntoView({ behavior: "smooth" });
+              }}
             >
               <span>Get VPS Now</span>
               <ArrowRight className="w-5 h-5" />
             </motion.button>
             
             <motion.button
+              onClick={()=> navigate('/contact')}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-purple-600 font-semibold rounded-lg transition-all duration-200"

@@ -1176,7 +1176,7 @@ const DedicatedServers: React.FC<ServerPageProps> = ({ darkMode }) => {
                   ))}
                 </div>
                 
-                <Link to="https://donhoster.es/sobre-nosotros"> 
+                <Link to="/about-donhoster"> 
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}

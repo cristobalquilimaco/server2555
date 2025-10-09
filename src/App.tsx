@@ -46,7 +46,7 @@ function App() {
           <Route path="/web-hosting" element={<WebHosting darkMode={darkMode} />} />
           <Route path="/vps" element={<VPSPage darkMode={darkMode} />} />
           <Route path="/cloud" element={<CloudPage darkMode={darkMode} />} />
-          <Route path="/about" element={<AboutPage darkMode={darkMode} />} />
+          <Route path="/about-donhoster" element={<AboutPage darkMode={darkMode} />} />
           <Route path="/contact" element={<ContactPage darkMode={darkMode} />} />
           <Route path="/data-center-miami" element={<DataCenterPage darkMode={darkMode} />} />
           <Route path="/terms-conditions" element={<TermsConditions darkMode={darkMode} />} />

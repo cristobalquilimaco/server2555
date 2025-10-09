@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, MapPin, Facebook, Instagram, Twitter } from 'lucide-react';
 import logo from ".././images/logo.png"
+import Newsletter from './NewsLetter';
 
 interface FooterProps {
   darkMode: boolean;
@@ -10,7 +11,7 @@ interface FooterProps {
 const Footer: React.FC<FooterProps> = ({ darkMode }) => {
   const quickLinks = [
     { name: 'Home', path: '/' },
-    { name: 'About us', path: '/about' },
+    { name: 'About us', path: '/about-donhoster' },
     { name: 'Dedicated server', path: '/dedicated-servers' },
     { name: 'VPS KVM', path: '/vps' },
     { name: 'Cloud server', path: '/cloud' },
@@ -174,27 +175,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
               })}
             </div>
             
-            <div className="mt-8">
-              <h4 className={`font-semibold mb-4 transition-colors duration-300 ${
-                darkMode ? 'text-white' : 'text-gray-900'
-              }`}>
-                Newsletter
-              </h4>
-              <div className="flex">
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  className={`flex-1 px-4 py-2 rounded-l-lg border transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
-                    darkMode 
-                      ? 'bg-gray-800 border-gray-700 text-white' 
-                      : 'bg-white border-gray-300 text-gray-900'
-                  }`}
-                />
-                <button className="bg-purple-600 text-white px-4 py-2 rounded-r-lg hover:bg-purple-700 transition-colors duration-300">
-                  Subscribe
-                </button>
-              </div>
-            </div>
+              <Newsletter darkMode={darkMode}/>
           </div>
         </div>
 

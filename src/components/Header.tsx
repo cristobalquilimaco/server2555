@@ -18,7 +18,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
     { name: 'Web Hosting', path: '/web-hosting' },
     { name: 'VPS', path: '/vps' },
     { name: 'Cloud', path: '/cloud' },
-    { name: 'About', path: '/about' },
+    { name: 'About', path: '/about-donhoster' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
