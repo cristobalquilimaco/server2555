@@ -121,7 +121,7 @@ const DataCenterPage: React.FC<DataCenterPageProps> = ({ darkMode }) => {
         />
         <meta
           name="keywords"
-          content="miami data center, data center miami, miami hosting, dedicated servers miami, colocation miami, cloud hosting, global connectivity, tier 1 data center, redundant infrastructure, donhoster, netcrohosting, hurricane protected data center"
+          content="miami data center, data center miami, miami hosting, dedicated servers miami, colocation miami, cloud hosting, global connectivity, tier 1 data center, redundant infrastructure, donhoster, hurricane protected data center"
         />
         <meta name="author" content="DonHoster" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
@@ -274,7 +274,7 @@ const DataCenterPage: React.FC<DataCenterPageProps> = ({ darkMode }) => {
                 </div>
 
                 <p className={`text-lg transition-colors duration-300 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                  NetcroHosting is committed to meeting the demand of IT. And you offer fast and secure connections
+                  DonHoster is committed to meeting the demand of IT. And you offer fast and secure connections
                   with 24/7 availability in downtown Miami, South Florida.
                 </p>
               </div>
